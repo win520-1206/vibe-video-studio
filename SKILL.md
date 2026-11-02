@@ -1,96 +1,49 @@
 ---
 name: vibe-cinematic-video
-description: 创作或重制具有剧情、连续空间动画和声画互动的科学可视化视频。用于科普短剧、粒子与概率动画、科学模型驱动的系列短片，以及从参考拆解到Remotion/WebGL渲染交付的完整制作。适用于用户指出视频像PPT、需要更强运镜或音乐与动画互动的任务；普通演示文稿和单纯剪辑不必使用。
+description: 按主题原创设计科学可视化视频，结合故事、模型动画、动态文字和音乐互动，使用Remotion与按需选用的Canvas、WebGL或Blender完成工程与交付。适用于科普短剧、知识短片及改善PPT感或雷同动画的任务。
 ---
 
 # vibe-cinematic-video
 
-将科学问题编成可以观看的过程，再用连续运动和声音推动叙事。默认制作方向：深色空间、克制的暖金与冷蓝、粒子组织与解体、透视运镜、完整文案的动态短语呈现、少量事件音效。用户可以改变配色、画幅、配音、技术栈及交付目标；案例参数不覆盖新任务要求。
+让观众看见问题、理解机制，再产生顿悟和共鸣。复用制作工具，每个作品重新设计视觉对象与过程；禁止把上一作品的球体、点阵或随机游走换标题当成新片。
 
-## 使用入口
+首次应用时告知用户。新作先集中询问尚缺的主题/科学问题、受众用途、集数与各集片长、画幅帧率、资料素材、样片或整片、输出位置。已确认的参数沿用，不重复问。用户授权自行决定时记录本次选择。示例的时长、集数、节拍均不是默认值。
 
-首次使用时告知用户正在应用本Skill。识别新片、样片、既有作品改版或局部节奏修订，继承已经确认的决定。按当前问题阅读支持文档，不必一次加载全部：
+## 构思与参考
 
-|需要|阅读|
-|---|---|
-|独立工程创建、运行命令、配置接口与检查|[scaffold.md](references/scaffold.md)|
-|动态文案、文字角色、主体动作与镜头衔接|[dynamic-text-and-motion.md](references/dynamic-text-and-motion.md)|
-|科学对象如何变成可理解的镜头|[scientific-shot-design.md](references/scientific-shot-design.md)|
-|可选三维建模、剖切与离线渲染|[blender.md](references/blender.md)|
-|需求、参考、故事与迭代|[workflow.md](references/workflow.md)|
-|技术分层、确定性动画与数据边界|[architecture.md](references/architecture.md)|
-|运镜、粒子、音乐、音效和字幕|[motion-and-audio.md](references/motion-and-audio.md)|
-|音乐更换、默认曲、鼓点与高潮分析、节奏适配|[music-adaptation.md](references/music-adaptation.md)|
-|工程、渲染、运行环境和局部修订|[engineering.md](references/engineering.md)|
-|科学证据、模型与视觉误导|[scientific-integrity.md](references/scientific-integrity.md)|
-|成片、卡点、音轨、打包与交接|[verification.md](references/verification.md)|
-|可复用经验、改版决策与实现局限|[production-lessons.md](references/production-lessons.md)|
-|调用示例、配置和项目文件模板|[project-contract.md](references/project-contract.md)|
+先读[主题设计](references/theme-led-design.md)。参考的重点是“文字说到什么，画面就让它发生”：对象、条件、变化、结果必须能被看见。生活疑问适合时采用；科学实验、工程任务可从异常或目标冲突开场。不强制人生哲理，不用科学术语证明生活类比。科普短剧保留角色目标、阻碍与验证，不做成资料轮播。
 
-## 调用时先收集本次参数
+拆解用户参考，分别记录亲见的画面、实际听取的声音和算法推测。不要把关键帧观察说成逐秒审看，也不要复制具体文案、角色与画面。文档中的120秒、70%/30%仅为示例。主题模型和科学主张仍须查可靠来源。
 
-开始新作品时，先向用户集中询问尚未给出的项目参数：主题／核心科学问题、用途与受众、集数、单集或总时长、画幅与输出规格、素材与资料、样片或直接整片、输出位置。用户已经明确给出的值直接记录，不重复询问。不要从示例配置填入三集、120秒、17秒，也不要从示例源码推断本次时长。
+在本次docs/visual-design.md中写主题对象、视觉隐喻、机制、尺度、动作语法、文字策略、音乐情绪与相较已有作品的区别。每镜写初态、条件、动作、结果、理解目标、依据、声音事件和接续方式。先设计主体，后设计相机、文字与光效。用装饰运动冒充解释性动作不合格。具体分镜见[scientific-shot-design.md](references/scientific-shot-design.md)。
 
-可直接问：“这次做什么主题、给谁看？需要几集，每集多长？横屏还是竖屏、用于什么平台？先做样片还是直接完成全片？音乐和风格默认沿用之前的，也可以指定新的素材与风格。”
+## 音乐与文字
 
-关键参数未确定时，可先读素材与分析默认音乐，但不进入依赖这些参数的分镜、全片编码或断言。用户说由你决定时，提出本次方案与理由并记录授权，不把案例值当作默认答案。
+默认风格cinematic-spatial保留深色、电影感与有限强调色，但不预设球体、粒子或固定镜头。用户可覆盖风格。默认音乐以assets/defaults.json登记的本机下载版为准；优先使用本次用户音乐，其次已选登记曲目，再用默认曲。公开分发不附私人曲目，缺失时询问位置或替换素材。
 
-**可继承的默认项只有偏好与资源**：默认风格为cinematic-spatial；默认音乐为此前提供的参考音轨，使用assets/defaults.json中明确登记的资源；默认以主体过程与完整动态文案共同叙事、无机械对白。上述默认均可由用户覆盖，不强制每次重问。
+新曲分析频段、瞬态、节奏、段落与高潮候选，区分算法建议和实际审听；按本次故事、时长、选段与帧率重新确定卡点。关键理解对应音乐揭示，留出阅读和余韵；不每拍切镜、不固定17秒、不颠倒因果。参见[music-adaptation.md](references/music-adaptation.md)。未分离混音不能称纯BGM；下载版也不自动等于无声乐音轨。
 
-音乐优先级：用户本次指定的音乐＞用户当前选择的已登记音乐＞默认参考音轨。风格优先级：用户本次说明＞用户选择的styleId＞默认cinematic-spatial。新风格加入assets/styles/索引，不能抹掉此前风格，也不能仅用一句“其他风格”而丢失规范。
+原稿先短句化；确认后保留完整内容及限制条件。画面文案分时呈现，叙事大字、对象标签和公式各有分工，不常驻“标题+底部整句+说明”。排版随对象与构图选择，不自动左右交替。字效后留稳定阅读，完整SRT仍用确认稿。详见[dynamic-text-and-motion.md](references/dynamic-text-and-motion.md)。
 
-每次选定曲目后都要核对时长与真实内容。新曲必须重新分析鼓点、节奏／速度、段落与高潮候选，听取或明确标注未审听，再将镜头、揭示、转场、光效和停顿映射到该音乐。即使继续默认曲，也按本次片长重新选段与确定卡点。17秒没有通用特殊地位。
+## 工程实现
 
-实现步骤见[调用问答与参数协议](references/project-contract.md)、[音乐适配](references/music-adaptation.md)。
+读[scaffold.md](references/scaffold.md)创建独立工程：`node scripts/create-project.mjs <新目录>`。目标非空停止。模板只有制作管线，场景注册表为空；按本题材编写共享状态与renderer，同名注册模型和视图。无通用视觉回退。`--demo`为隔离的接口诊断，不是成片模板或默认参数。
 
-## 建立本次制作约定
+React精确排字，Canvas/SVG解释图形，WebGL处理空间或大量对象，复杂实体、材质、剖切和装配可逐镜评估[Blender](references/blender.md)，不强制启用或自动安装。模型独立，时间由frame/fps计算，固定随机种子，支持乱序与局部渲染。动作、文字强调、音效引用同一事件。更多见[架构](references/architecture.md)、[工程](references/engineering.md)。
 
-将调用问答结果写入本次配置。镜头时刻由本次故事和所选音乐共同决定，而不是先设固定标题时长再寻找配乐。用户可明确覆盖默认音乐、风格及配音选择。
-
-在作品目录维护项目约定、场景事件表和进度文件，记录用户确认的具体镜头与声音关系。旧作品和原始输入保留；新作使用独立目录。
-
-优先考虑已实践的本地路线：**Remotion编排＋React字幕＋WebGL空间图形＋Canvas2D科学图形＋Python音频/模型/验收**。它适合精确中文、可解释模型、重复渲染和精确卡点。题材若需要人物表演、实拍感或复杂物理，应评估增加生成媒体、实拍或其他3D工具，不为坚持既有栈而降低表达质量。
-
-## 默认文字与动作策略
-
-保留完整确认稿，将其拆成与动作对应的短语分时呈现，不把每句都固定在画面下方。主要文案、对象标签、稳定公式分别设计；标题和科学说明不默认常驻叠加。完整SRT与画面片段分开管理，拆句不能漏掉条件、否定或数值。字效进入后留稳定阅读窗口。详见[动态文案与主体动作](references/dynamic-text-and-motion.md)。
-
-先设计对象如何发生、发展并留下结果，再设计相机和文字；背景漂浮、缩放、图表入场不能单独证明主体有动效。新项目使用full-dynamic，旧配置没有扩展字段时保留legacy，不自动改写既有作品。
-
-## 制作关系
-
-1. 每段写清对象的初始状态、动作和结果。只有文字进入、图形旋转和换页，不能代替科学过程。
-2. 把事件与持续运动分开。揭示、相互作用、筛选完成和音乐落点有明确时刻；运镜、粒子运动与阅读停留有自己的持续时间。
-3. 时间由帧号/fps推导，固定随机种子，任意帧可独立重建。生产动画不依赖真实计时器、worker顺序或上一帧是否执行。
-4. 空间变化服务科学关系。艺术隐喻、动作放慢、教学模型和真实数据分别标明，不能为卡点改变因果顺序。
-5. 原音乐、附加音效与人声分别记录。未分离的参考混音不能称为纯BGM；波形峰值不自动等于语义节拍；没实际听取的音频不能声称已经审听。
-6. 公式、单位、数值、图例和字幕保留稳定阅读窗口。光效和标题不能压住关键信息。
-7. 验收以导出文件为准。源码通过、预览正常和渲染命令成功，都不能单独证明成片正确。
+旧作品工程不覆盖。此版移除旧视觉组件，旧walk/distribution配置继续用其原工程；主动迁移需编写主题renderer，不宣称旧配置可直接套新模板。
 
 ## 推进与交付
 
-先拆参考和科学问题，写剧情与“时间—动作—声音—知识”事件表，再做代表性片段。需要用户选择时给实际可播放样片；用户已要求完成整片时，不另设强制确认关卡。
+需求和参考 → 科学依据 → 原稿与动作分镜 → 音乐选段/事件映射 → 主题镜头实现 → 代表片段 → 成片与验收。音乐分析可提前并行推进，不强制机械线性流程。已授权整片时不增加不必要的确认关卡。
 
-确认后把行为规则应用到不同科学对象，不用同一装饰场景替换全系列。复杂公式与数值可以更稳定。渲染中检查已完成部分，报告真实进度。局部改版先明确要保留的音乐时钟、总长和章节边界，再核验接缝、帧数及音轨。
+验收包括模型、确认稿覆盖、稳定阅读、文字越界和遮挡、主体变化、镜头接缝、确定性、音乐位置与实际解码。看实际片段判断理解、审美和声画互动；自动检查不能代替科学核验、连续观看和审听。参见[verification.md](references/verification.md)、[scientific-integrity.md](references/scientific-integrity.md)。
 
-交付约定的MP4、字幕、工程、来源和实际验收记录；需要时加章节预览页和ZIP。临时localhost页面不是成果本体。记录最终文件名、复现入口、已确认选择和未完成限制，便于新会话接续。
+交付约定的视频、SRT、工程、依据和验收记录；明确未做的检查。原输入、私人音乐与公开分发分别管理，不把本机路径、参考视频、成片或缓存带入公开包。任务授权范围外不自行推送GitHub。
 
-## 可运行工程与可选三维
+## 按需资源
 
-新作品可用`scripts/create-project.mjs <新目录>`生成独立Remotion工程；先完成本次问答与分镜，再填写配置并运行。`--demo`仅创建独立随机游走验证例子，其参数不成为默认值。项目非空时停止，不覆盖既有作品。详见[脚手架](references/scaffold.md)。
-
-分镜逐镜选择React/Canvas2D/WebGL或Blender。Blender仅在复杂结构、剖切、装配或材质需要时启用，未安装不影响基础制作。它输出无声视频或透明序列，由统一时间轴合成；禁止静默降级。音频分析仍沿用现有工具。新增检查不能替代科学核验、连续观看或审听。
-
-## 工具与资产
-
-- `scripts/audio_features.py`：PCM WAV→按帧频段、幅度和候选瞬态；依赖NumPy，不做语音识别或音源分离。
-- `scripts/music_structure.py`：从音频特征估计节奏网格、鼓点候选、段落变化和高潮候选，生成剪辑参考；检测结果需要结合实际听取与叙事复核。
-- `assets/defaults.json` 与 `assets/styles/`：默认音乐、可扩展风格索引；项目参数留待调用问答。
-- `scripts/inspect_media.py`：明确指定ffprobe，检查时长、规格、音频流并计算卡点帧；不代替完整解码与视觉检查。
-- `assets/project-contract.example.json`：待填写的项目配置，不预置集数、片长或卡点。
-- `assets/animation-core/`：不绑定题材的帧时间、确定性随机、透视投影与连续形变示例，集数、片长和落点由项目参数传入。
-
-```text
-python scripts/audio_features.py --input music.wav --fps 30 --output audio-features.json
-python scripts/inspect_media.py --ffprobe /actual/path/ffprobe --input episode.mp4 --contract project-contract.json --output metadata-check.json
-```
+- [workflow.md](references/workflow.md)：需求与迭代；[project-contract.md](references/project-contract.md)：调用约定。
+- [motion-and-audio.md](references/motion-and-audio.md)：运动与声音；[production-lessons.md](references/production-lessons.md)：制作经验。
+- scripts/audio_features.py：PCM WAV按帧特征；scripts/music_structure.py：节拍和高能段候选；scripts/inspect_media.py：媒体规格。
+- assets/defaults.json与assets/styles/：资源和美术偏好；assets/project-contract.example.json：待填项目配置。

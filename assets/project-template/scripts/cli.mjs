@@ -4,7 +4,7 @@ import {spawn} from 'node:child_process';
 import {arg,project,episodes,tool,run,json,write,hash,browser,assetErrors,publicPath,copyTree,sourceHash} from './common.mjs';
 import {criticalFrames} from '../shared/project.mjs';
 import {cuesFor} from '../shared/presentation.mjs';
-import {inspectMotion} from '../shared/motion.mjs';
+import {inspectMotion} from '../shared/scene-state.mjs';
 import {inspectProject,inspectBoxes,inspectBlenderSources,inspectTextDensity} from './validate.mjs';
 const mode=process.argv[2];
 async function main(){const p=project();fs.mkdirSync('qa',{recursive:true});

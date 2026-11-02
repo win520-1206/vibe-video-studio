@@ -12,7 +12,7 @@
 
 ## 完整确认稿与分时呈现
 
-保留captions及独立script-manifest作为完整母本，SRT仍导出母本。新项目presentation.mode为full-dynamic；旧配置没有此字段时维持legacy，不改写旧作品。
+保留captions及独立script-manifest作为完整母本，SRT仍导出母本。新项目presentation.mode为full-dynamic；旧作品保留原工程；此版新模板使用主题renderer。
 
 每条确认稿可以对应多个textCues，用sourceId关联。片段按时间顺序拼接必须与原句完全一致，包括数值、条件和标点；不能为字效漏掉否定、范围或假设。默认按标点给出初步拆分，作者必须结合动作重新检查节奏。
 
@@ -44,15 +44,15 @@ scene.textCues可覆盖自动拆分；scene.annotations可以添加首次需要�
 
 此处时刻只是字段示例，不是新项目默认值。start/end是绝对分集秒数，并需对齐项目帧率。文本进入由该cue时刻触发，eventId将关键词强调或相关动作关联到共享事件，不能维护互不相干的时钟。
 
-placement支持left/right/center/bottom/anchor；x/y/width为画幅比例。锚定使用anchor:{id,offset:{x,y}}。示例主体支持walker-ID；新增科学对象应在运动模块登记其稳定ID，并扩展对应校验。label持续跟随对象，main锚定文本在阅读开始后冻结位置。锚定自动限制到画幅范围，仍需检查换行与主体遮挡。
+placement支持left/right/center/bottom/anchor；x/y/width为画幅比例。锚定使用anchor:{id,offset:{x,y}}。场景用anchorIds声明自己的稳定对象ID，状态返回相同ID。label持续跟随对象，main锚定文本在阅读开始后冻结位置。锚定自动限制到画幅范围，仍需检查换行与主体遮挡。
 
 effect支持mask（遮罩揭示）、relay（短语接力）、path（路径入场）、follow（对象跟随）、emphasis（短暂强调）和none。path接受起终两个偏移点，阅读阶段停在终点；follow要求对象锚点。字效用于引导注意，不让整句不停飞动、旋转或闪烁。
 
 ## 主体与镜头接口
 
-motion配置可声明developStart/developEnd、expect和camera。camera提供fromZoom/toZoom、panX/panY和yaw；场景衔接继承前一镜相机状态。运动阶段为prepare/develop/hold，expect可选择subject或hold；只有明确的阅读/结果停留才标hold。
+运动阶段由本题材state返回phase和expected，分别表达prepare/develop/hold及subject/hold/media。相机、形变与跨镜共享状态由项目实现，没有默认相机运动或自动继承。只有明确的阅读/结果停留才标hold。
 
-随机游走示例中，walker-0逐步走过真实采样轨迹，随后进入终点统计；其他样本经过同一模型生成并落入对应区间。数值累积只统计实际到达的样本。边界相机连续，轨迹退出与新对象发展重叠组织，不通过换页重启。
+主题state返回稳定对象ID、归一化位置、保护区域和解释过程的metrics；相机与装饰不计入主体变化。跨镜接续按本题材共享模型设计。
 
 ## 检查边界
 

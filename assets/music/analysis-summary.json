@@ -1,0 +1,47 @@
+{
+  "sourceSha256": "7d27a8a12bbc535336730653ceb7acd30e2af8493bab8f1d7129b9744155f473",
+  "containerDurationSeconds": 169.534694,
+  "decodedAnalysisDurationSeconds": 169.50566893424036,
+  "analysisFps": 30,
+  "tempo": {
+    "estimatedBpm": 112.5,
+    "candidates": [
+      {
+        "bpm": 112.5,
+        "periodFrames": 16,
+        "periodicityScore": 0.57671
+      },
+      {
+        "bpm": 75.0,
+        "periodFrames": 24,
+        "periodicityScore": 0.5474
+      },
+      {
+        "bpm": 120.0,
+        "periodFrames": 15,
+        "periodicityScore": 0.22337
+      }
+    ],
+    "confidence": "candidate_only",
+    "caveat": "Half/double tempo ambiguity and tempo changes require review."
+  },
+  "climaxCandidates": [
+    {
+      "startSeconds": 26.0,
+      "endSeconds": 38.0,
+      "score": 0.47264
+    },
+    {
+      "startSeconds": 93.0,
+      "endSeconds": 105.0,
+      "score": 0.47259
+    },
+    {
+      "startSeconds": 109.0,
+      "endSeconds": 121.0,
+      "score": 0.47002
+    }
+  ],
+  "listeningStatus": "not_reviewed",
+  "usage": "Recompute for project crop and fps; algorithm candidates are not verified drum hits or fixed edit points"
+}

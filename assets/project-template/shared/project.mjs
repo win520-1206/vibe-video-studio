@@ -1,6 +1,7 @@
 // Shared by Node tools and the browser. Times are absolute episode seconds.
 import {cuesFor,cueWindow,inspectTextPlan,textLayout} from './presentation.mjs';
-import {motionAt} from './motion.mjs';
+import {sceneState} from './scene-state.mjs';
+import {sceneSpecs} from './scene-registry.mjs';
 export const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 export const progress = (t, a, b) => clamp((t-a)/Math.max(1e-9,b-a));
 export function frameAt(seconds, fps) {
@@ -16,7 +17,7 @@ export function normalize(raw) {
   need(Number.isFinite(v.fps)&&v.fps>0, 'video.fps: missing or invalid');
   need(Number.isInteger(raw.project?.episodeCount)&&raw.project.episodeCount>0,'project.episodeCount: missing or invalid');
   need(Array.isArray(raw.episodes)&&raw.episodes.length===raw.project?.episodeCount,'episodes must match episodeCount');
-  need(!raw.presentation?.mode||['legacy','full-dynamic'].includes(raw.presentation.mode),'Unknown presentation mode');
+  need(!raw.presentation?.mode||raw.presentation.mode==='full-dynamic','Unknown presentation mode');
   if(errors.length)throw Error(errors.join('\n'));
   const ids=new Set();
   const episodes=raw.episodes.map((e)=>{
@@ -35,10 +36,11 @@ export function normalize(raw) {
     for(const s of scenes){
       need(s.id&&!sceneIds.has(s.id),`${e.id}: duplicate/missing scene ID`);sceneIds.add(s.id);
       need(Math.abs(s.start-cursor)<1e-7&&s.end>s.start,`${e.id}/${s.id}: gap, overlap or reversed scene`);cursor=s.end;
-      need(['walk','distribution','blender'].includes(s.kind),`${s.id}: implement/register scene kind ${s.kind}`);
-      if(s.kind!=='blender'){
-        need(Number.isInteger(s.model?.steps)&&s.model.steps>0&&s.model.steps<=10000,`${s.id}: model.steps must be 1..10000`);
-        need(Number.isInteger(s.model?.samples)&&s.model.samples>0&&s.model.samples<=100000,`${s.id}: model.samples must be 1..100000`);
+      need(['authored','blender'].includes(s.kind),`${s.id}: obsolete scene kind; keep the old project engine or author a new renderer`);
+      if(s.kind==='authored'){
+        need(!!sceneSpecs[s.renderer],`${s.id}: register subject renderer ${s.renderer}`);
+        if(sceneSpecs[s.renderer]?.validate)errors.push(...sceneSpecs[s.renderer].validate(s));
+        need(Array.isArray(s.anchorIds),`${s.id}: declare anchorIds (empty array allowed)`);
       }
       for(const k of ['start','end'])try{frameAt(s[k],v.fps)}catch(x){errors.push(x.message)}
       for(const k of ['object','action','before','after','understanding','science'])need(typeof s[k]==='string'&&s[k].trim(),`${s.id}: missing storyboard ${k}`);
@@ -56,11 +58,11 @@ export function normalize(raw) {
         if(q.eventId)need(eventIds.has(q.eventId),`${q.id}: missing event ${q.eventId}`);
       }
       for(const id of s.eventIds||[])need(eventIds.has(id),`${s.id}: missing event ${id}`);
-      if(raw.presentation?.mode==='full-dynamic'){
+      if(!raw.presentation?.mode||raw.presentation.mode==='full-dynamic'){
         errors.push(...inspectTextPlan(s,v.fps).errors);
         for(const q of cuesFor(s,v.fps)){
           if(q.eventId)need(eventIds.has(q.eventId),`${q.id}: unknown cue event`);
-          if(q.anchor?.id){const index=Number(q.anchor.id.split('-')[1]);need(index>=0&&index<(s.kind==='walk'?1:s.model?.samples??0),`${q.id}: anchor does not belong to subject`);}
+          if(q.anchor?.id){need(s.anchorIds?.includes(q.anchor.id),`${q.id}: anchor does not belong to subject`);}
         }
         if(s.motion?.developStart!==undefined||s.motion?.developEnd!==undefined){need(s.motion.developStart>=s.start&&s.motion.developEnd<=s.end&&s.motion.developEnd>s.motion.developStart,`${s.id}: invalid motion stages`)}
       }
@@ -70,13 +72,13 @@ export function normalize(raw) {
     return {...e,durationSeconds:duration,durationInFrames:frames,scenes,events,audio};
   });
   if(errors.length)throw Error(errors.join('\n'));
-  return {...raw,video:v,episodes,presentation:{mode:'legacy',...raw.presentation},style:{background:'#050b12',warm:'#dfbf83',cool:'#9bc9e3',text:'#f1eee8',fontFamily:'sans-serif',...(raw.style?.tokens||{})},seed:raw.seed??137};
+  return {...raw,video:v,episodes,presentation:{mode:'full-dynamic',...raw.presentation},style:{background:'#050b12',warm:'#dfbf83',cool:'#9bc9e3',text:'#f1eee8',fontFamily:'sans-serif',...(raw.style?.tokens||{})},seed:raw.seed??137};
 }
 export function atFrame(project,episode,frame,features){
   const time=frame/project.video.fps;const scene=episode.scenes.find(s=>time>=s.start&&time<s.end);
   if(!scene)throw Error(`No scene at ${frame}`);
   const event=(id)=>episode.events.find(e=>e.id===id);
-  const signal=(name)=>features?.bands?.[name]?.[frame]??0;
+  const signal=(name,at=frame)=>features?.bands?.[name]?.[at]??0;
   return {frame,fps:project.video.fps,width:project.video.width,height:project.video.height,time,localTime:time-scene.start,
     scene,episode,seed:project.seed,style:project.style,signal,event};
 }
@@ -89,7 +91,7 @@ export function criticalFrames(project,e){
       if(q.placement==='anchor'){
         const extrema={minX:[Infinity,0],maxX:[-Infinity,0],minY:[Infinity,0],maxY:[-Infinity,0]};
         for(let f=Math.ceil(q.start*project.video.fps);f<Math.min(e.durationInFrames,q.end*project.video.fps);f++){
-          const ctx=atFrame(project,e,f,null),state=motionAt(ctx),anchor=q.role==='label'?state:motionAt(ctx,Math.max(q.start,Math.min(ctx.time,win.readStart)));if(!anchor.objects.some(o=>o.id===q.anchor?.id))continue;const box=textLayout(q,ctx,state,anchor);
+          const ctx=atFrame(project,e,f,null),state=sceneState(ctx),anchor=q.role==='label'?state:sceneState(ctx,Math.max(q.start,Math.min(ctx.time,win.readStart)));if(!anchor.objects.some(o=>o.id===q.anchor?.id))continue;const box=textLayout(q,ctx,state,anchor);
           for(const [key,value,less]of [['minX',box.x,true],['maxX',box.x,false],['minY',box.y,true],['maxY',box.y,false]])if(less?value<extrema[key][0]:value>extrema[key][0])extrema[key]=[value,f];
         }
         for(const pair of Object.values(extrema))if(Number.isFinite(pair[0]))out.add(pair[1]);

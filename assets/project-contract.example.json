@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "status": "awaiting_user_parameters",
   "project": {
     "title": null,
@@ -42,5 +42,12 @@
   "episodes": [],
   "presentation": {
     "mode": "full-dynamic"
+  },
+  "visualDesign": {
+    "policy": "author per subject; no preset scene",
+    "concept": null,
+    "visualMetaphor": null,
+    "mechanism": null,
+    "differenceFromPreviousWork": null
   }
 }

@@ -1,95 +1,37 @@
 {
-  "skill": "vibe-cinematic-video",
-  "revision": "full-dynamic-text-and-subject-motion",
-  "date": "2026-10-31",
-  "formatValidation": "passed with official quick_validate.py in UTF-8 mode",
-  "typecheck": "passed",
-  "unitTests": {
-    "passed": 26,
-    "failed": 0
-  },
-  "renderedFrames": {
-    "scenarios": [
-      {
-        "name": "horizontal",
-        "frames": 22,
-        "width": 960,
-        "height": 540,
-        "stableCues": 5
-      },
-      {
-        "name": "portrait",
-        "frames": 22,
-        "width": 540,
-        "height": 960,
-        "stableCues": 5
-      },
-      {
-        "name": "anchor",
-        "frames": 22,
-        "width": 960,
-        "height": 540,
-        "stableCues": 5
-      }
+  "date": "2026-11-02",
+  "revision": "theme-authored-scene-system",
+  "tests": {
+    "passed": 15,
+    "typecheck": "passed",
+    "configurationVariants": "landscape/portrait; 24/30/60fps",
+    "realRenderedFrames": 8,
+    "finalImplementationSpotFrames": [
+      48,
+      120
     ],
-    "errors": [],
-    "warnings": [],
-    "deterministicSeeking": true,
-    "injectedMissingWordsRejected": true,
-    "comparisonFilmProduced": false,
-    "passed": true
+    "seekTest": [
+      48,
+      0,
+      48
+    ],
+    "sameFramePngIdentical": true,
+    "browserErrors": []
   },
-  "additionalRenderedChecks": {
-    "eventEmphasisNoLayoutShift": true,
-    "actualOverflowDetected": true,
-    "legacyCompatibility": true,
-    "formulaAndEmphasisRendered": true,
-    "passed": true,
-    "comparisonFilmProduced": false
+  "template": "empty registries; no visual fallback; diagnostics copied only with --demo",
+  "music": {
+    "sourceCopyHashVerified": true,
+    "durationSeconds": 169.534694,
+    "analysis": "new downloaded MP3 analyzed at 30fps; candidates only",
+    "listening": "not_reviewed"
   },
-  "shortTechnicalClip": {
-    "frames": 48,
-    "fullDecode": true,
-    "audioTimeline": {
-      "sourceStartFrame": 132,
-      "sourceStartSeconds": 5.5,
-      "offsetSamples": 0,
-      "gainAdjustedRmsError": 0.00014022653576968065,
-      "gain": 0.706672121641292,
-      "passed": true
-    },
-    "sourceFingerprint": "verified"
-  },
-  "compatibility": {
-    "missingPresentationMode": "legacy",
-    "newProjectDefault": "full-dynamic",
-    "existingProjectsAutomaticallyChanged": false,
-    "captionMotherScript": "retained",
-    "srtExport": "continues to export complete source captions, not presentation fragments",
-    "newProjectGeneratorAndLegacyImport": "verified"
-  },
-  "scope": {
-    "comparisonFilmProduced": false,
-    "newFullFilmProduced": false,
-    "referenceFootageCopied": false,
-    "githubPushed": false
-  },
-  "manualReview": {
-    "representativeStills": "viewed",
-    "referenceMotion": "overview and time-sequence frames inspected",
-    "continuousViewing": "not_reviewed",
-    "listening": "not_reviewed",
-    "scientificScope": "teaching random walk; counts and endpoints checked against model"
-  },
-  "blender": {
-    "optional": true,
-    "realRender": "not_run"
-  },
-  "limitations": [
-    "Automated state and box checks do not certify scientific correctness or visual quality.",
-    "Subject-motion summaries are separate from camera/decoration; actual pixel evidence still requires review.",
-    "Only internal technical frames and a short clip were rendered in this revision.",
-    "Blender still requires real-machine rendering validation."
+  "referenceReview": "user guide read; eight sampled keyframes per supplied video; no continuous audio/video review",
+  "notPerformed": [
+    "full production render",
+    "new cinematic quality sample",
+    "actual music listening",
+    "Blender rendering"
   ],
-  "anchorTrajectoryExtrema": "critical frame selection tested"
+  "compatibility": "old works untouched; old walk/distribution contracts require original engine or deliberate authored migration",
+  "publication": "local only; GitHub not pushed"
 }

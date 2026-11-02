@@ -1,15 +1,16 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "music": {
-    "defaultId": "reference-music",
-    "asset": "music/default-reference.m4a",
-    "kind": "optional local user-supplied soundtrack; public distribution includes no music",
+    "defaultId": "user-downloaded-track",
+    "asset": "music/default-reference.mp3",
+    "kind": "user-provided downloaded MP3; no source separation performed",
     "selectionPriority": [
       "current_user_music",
       "current_selected_registered_music",
       "default_asset"
     ],
     "missingAssetAction": "Ask user for its location or replacement; do not silently select another song",
+    "displayName": "秋成-若如初见（开智小曲）",
     "assetIncluded": false
   },
   "style": {

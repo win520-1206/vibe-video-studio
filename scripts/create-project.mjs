@@ -10,12 +10,13 @@ try{
  const dest=path.resolve(target);if(fs.existsSync(dest)&&(!fs.statSync(dest).isDirectory()||fs.readdirSync(dest).length))throw Error('Target must be absent or an empty directory');
  const template=path.join(skill,'assets/project-template');let config;
  if(argv.includes('--demo')&&option('contract'))throw Error('Choose either --demo or --contract');
- if(argv.includes('--demo'))config=JSON.parse(fs.readFileSync(path.join(skill,'assets/examples/random-walk.json'),'utf8'));
+ if(argv.includes('--demo'))config=JSON.parse(fs.readFileSync(path.join(skill,'assets/diagnostics/contract.json'),'utf8'));
  else config=JSON.parse(fs.readFileSync(option('contract')||path.join(skill,'assets/project-contract.example.json'),'utf8'));
  if(!option('contract')&&!config.presentation)config.presentation={mode:'full-dynamic'};
- if(option('contract')){const {normalize}=await import(pathToFileURL(path.join(template,'shared/project.mjs')).href);normalize(config)}
+ // Subject registries are authored in the generated project before normalization.
  const music=option('music');if(music&&!fs.statSync(path.resolve(music)).isFile())throw Error('Music file missing');
  fs.mkdirSync(dest,{recursive:true});copyTree(template,dest);fs.mkdirSync(path.join(dest,'tools'),{recursive:true});
+ if(argv.includes('--demo'))for(const [from,to]of [['scene-registry.mjs','shared/scene-registry.mjs'],['scenes.tsx','src/scenes.tsx']])fs.copyFileSync(path.join(skill,'assets/diagnostics',from),path.join(dest,to));
  for(const name of ['audio_features.py','music_structure.py','inspect_media.py'])fs.copyFileSync(path.join(skill,'scripts',name),path.join(dest,'tools',name));
  fs.copyFileSync(path.join(skill,'requirements.txt'),path.join(dest,'requirements.txt'));
  fs.mkdirSync(path.join(dest,'public'),{recursive:true});fs.mkdirSync(path.join(dest,'docs'),{recursive:true});
@@ -28,6 +29,6 @@ try{
  fs.writeFileSync(path.join(dest,'project-contract.json'),JSON.stringify(config,null,2)+'\n');
  const manifest=Object.fromEntries((config.episodes||[]).map(e=>[e.id,e.scenes.flatMap(s=>(s.captions||[]).map(q=>({id:q.id,text:q.text})))]));
  fs.writeFileSync(path.join(dest,'script-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
- fs.writeFileSync(path.join(dest,'docs','sources.md'),'# Sources and model boundaries\n\n'+(argv.includes('--demo')?'Original pedagogical Bernoulli random walk. Each step is independently left/right with equal probability. Fixed seed, finite samples, no measured data. The moving subjects, endpoints and counts come from the same model. Demo music is synthesized locally.\n':'Record approved claims, primary sources, dates, model assumptions and asset permissions here.\n')+'\n'+(config.episodes||[]).flatMap(e=>e.scenes.map(s=>`## ${e.id}/${s.id}\n${s.science}\n`)).join('\n'));
+ fs.writeFileSync(path.join(dest,'docs','sources.md'),'# Sources and model boundaries\n\n'+(argv.includes('--demo')?'Original wave and branching interface diagnostics; not a scientific model or production scene. Demo music is synthesized locally.\n':'Record approved claims, primary sources, dates, model assumptions and asset permissions here.\n')+'\n'+(config.episodes||[]).flatMap(e=>e.scenes.map(s=>`## ${e.id}/${s.id}\n${s.science}\n`)).join('\n'));
  console.log(`Created ${dest}\nInstall: npm ci; python -m pip install -r requirements.txt\nFill project-contract.json; approve script-manifest.json independently; run npm run analyze:music, npm run doctor.`);
 }catch(e){console.error(e.message);process.exitCode=1}

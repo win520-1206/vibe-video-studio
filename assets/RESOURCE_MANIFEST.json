@@ -1,32 +1,50 @@
 {
-  "purpose": "Reusable video workflow, general animation mechanisms and user-selected default resources",
+  "purpose": "Topic-authored video workflow and scene-free production infrastructure",
   "defaultMusic": {
-    "asset": "music/default-reference.m4a",
+    "asset": "music/default-reference.mp3",
     "included": false,
-    "stemSeparation": false,
-    "sourceKind": "optional user-supplied soundtrack; not redistributed",
-    "projectDuration": "ask at invocation; adapt to selected music"
+    "bytes": 3992076,
+    "sha256": "7d27a8a12bbc535336730653ceb7acd30e2af8493bab8f1d7129b9744155f473",
+    "method": "byte-identical copy of user-selected downloaded MP3; no transcoding or source separation",
+    "measuredDurationSeconds": 169.534694,
+    "listeningStatus": "not_reviewed",
+    "sourceKind": "optional user-provided soundtrack; not redistributed"
   },
-  "defaultStyle": "cinematic-spatial",
-  "excludes": [
-    "original reference videos",
-    "final productions",
-    "credentials",
-    "node_modules",
-    "runtime caches",
-    "historical project-specific story, scene and model snapshots"
-  ],
-  "animationCore": "animation-core/",
   "files": [
     {
-      "path": "animation-core/deterministic-motion.ts",
-      "bytes": 1160,
-      "sha256": "bff67539832b53b2eaf906e041d326d55845c59d28ac345841f715cdefdde078"
+      "path": "defaults.json",
+      "bytes": 1084,
+      "sha256": "41ecc59a04a39c87d4ca185d055b859cda8dfaa34c5e5e2635ed13a4182c6f12"
     },
     {
-      "path": "animation-core/SceneLayer.tsx",
-      "bytes": 1412,
-      "sha256": "5ccc9aba715a955d259e27d28ed5ce919af1b69b932eb14e1538dfe0dbfff375"
+      "path": "diagnostics/contract.json",
+      "bytes": 1896,
+      "sha256": "8094345d1623edc5411a6e3bf07f857a5f5484bae98e0a9b82f04fcd323b5414"
+    },
+    {
+      "path": "diagnostics/scene-registry.mjs",
+      "bytes": 726,
+      "sha256": "b3521e476e087204992c0817e5cbf1735f3365ab0a7a321a8bae6a6eaf54c83a"
+    },
+    {
+      "path": "diagnostics/scenes.tsx",
+      "bytes": 783,
+      "sha256": "30aadb72a0aa6dbbd63a6f642c01d90b9cda0c5b41a1327b32f2417b3055f157"
+    },
+    {
+      "path": "music/analysis-summary.json",
+      "bytes": 1204,
+      "sha256": "8fca5d6f408f41bf0c8cb263dcd7724cd1c842e35701f665c47d808b99fd36c5"
+    },
+    {
+      "path": "music/README.md",
+      "bytes": 315,
+      "sha256": "9df61d6a79ee138a52efc4cbeb8181fa46b9ecef3f5ac29eb3137572343e1e1a"
+    },
+    {
+      "path": "project-contract.example.json",
+      "bytes": 1182,
+      "sha256": "3fb89b7db8874c6be84c52d2d7479b133d8c55b193a511ec18d2f7b8b3e37bcd"
     },
     {
       "path": "project-template/.gitignore",
@@ -37,6 +55,11 @@
       "path": "project-template/blender/build_scene.py",
       "bytes": 2574,
       "sha256": "acc20f305134127db965c94eae1b5c171a821698d0e69b09f72d9d8ff0bd2b7a"
+    },
+    {
+      "path": "project-template/docs/visual-design.md",
+      "bytes": 537,
+      "sha256": "1154b914b47b2971c1e88c879e03d3aa53bea6ad79de301cd4d2579205ea604f"
     },
     {
       "path": "project-template/package-lock.json",
@@ -50,8 +73,8 @@
     },
     {
       "path": "project-template/README.md",
-      "bytes": 5513,
-      "sha256": "72de598005a732d551d1e8e10a9e7e6f409076a553d3e2a99df170326545a1d6"
+      "bytes": 1817,
+      "sha256": "a9d72d7256e2e56f79c0d9295abe7912cd3e2606a26cf110e6001c06c0a56390"
     },
     {
       "path": "project-template/remotion.config.ts",
@@ -70,8 +93,8 @@
     },
     {
       "path": "project-template/scripts/cli.mjs",
-      "bytes": 7266,
-      "sha256": "8e41b4e87f4d00c842795d3a42246f0f4a1b1a5c8217799d8f19e5630cfed181"
+      "bytes": 7315,
+      "sha256": "9589bfae9542397745eb288ad847146894828ac6ff1623f5d6438b5fcc70abbd"
     },
     {
       "path": "project-template/scripts/common.mjs",
@@ -89,34 +112,29 @@
       "sha256": "909e6bd59333a5e035fbcf97b7cf1af8f1f7fcf1b85f15d25fac4dfd2f9d2b23"
     },
     {
-      "path": "project-template/shared/model.mjs",
-      "bytes": 621,
-      "sha256": "f98f1eac0184ee969ecc929b35ff22b3588609984e787f0142b491512d40fa03"
-    },
-    {
-      "path": "project-template/shared/motion.mjs",
-      "bytes": 5970,
-      "sha256": "d7ea96f234b7509673acc12533f3b88a6297c003e01e13e969afeb398fdf3f45"
-    },
-    {
       "path": "project-template/shared/presentation.mjs",
-      "bytes": 6532,
-      "sha256": "5f1db6ba328c2c826c3f2520e11f5545bbe823d487902f1bd92066f8fb6dcec2"
+      "bytes": 6567,
+      "sha256": "0d5ffb10624924c0e253794d1967aabebd9ff7015154a631c0a1821b89972169"
     },
     {
       "path": "project-template/shared/project.mjs",
-      "bytes": 8182,
-      "sha256": "a46a893fa9b459990db01b83b592c3b2818a722ada5a749614626b7b52dcdb59"
+      "bytes": 8336,
+      "sha256": "7e0ee299a0684333d0da5f0faa8eaf8af6f68c436bec534bfc0a9409eaedeb11"
     },
     {
-      "path": "project-template/src/Bloom.ts",
-      "bytes": 3992,
-      "sha256": "a53792e5ac2a584a3c3271dc7bdb5de8fc7891c86514b504e7a3f0a97cbbeb0f"
+      "path": "project-template/shared/scene-registry.mjs",
+      "bytes": 200,
+      "sha256": "bc4636292c71ff2964f99c910c2e27e262c5550685dd6dab95213972cda1a212"
+    },
+    {
+      "path": "project-template/shared/scene-state.mjs",
+      "bytes": 1633,
+      "sha256": "a6de704f98edc8acdb5de2c0f6fb9e51f773dbcfcb4048dfed8352f746167275"
     },
     {
       "path": "project-template/src/Film.tsx",
-      "bytes": 4142,
-      "sha256": "890a5d0149a5bf3005fca84e7bdcbdb84d4a48da577e54bb2440fad399ae475d"
+      "bytes": 3233,
+      "sha256": "3b2939a1720cd385b88bb1f3e21843871da69395ef3b6062bff5fc1274618725"
     },
     {
       "path": "project-template/src/index.ts",
@@ -124,39 +142,24 @@
       "sha256": "2e0e358282a1b998a65387c653b97c2bb2eb7aae94cf200fc0b8d919f7be73a6"
     },
     {
-      "path": "project-template/src/KineticText.tsx",
-      "bytes": 1949,
-      "sha256": "66a53ec6247f7aa84ddfa6ca7c4f094accff3766ba0f10d650f5a47b8057f9ec"
-    },
-    {
       "path": "project-template/src/Root.tsx",
       "bytes": 487,
       "sha256": "50d3320e52f02d11aa63811bd8f73e4e72e3fdb76a8ca96126b2ee16d2fc69a8"
     },
     {
-      "path": "project-template/src/ScienceLayer.tsx",
-      "bytes": 2222,
-      "sha256": "f12194f503c882e2bb438ecd156989fc486d2d886f5e742ffb43397557765b9c"
+      "path": "project-template/src/scenes.tsx",
+      "bytes": 187,
+      "sha256": "9952ff32cd2cadf8aec71d398fb95858cb5700a21d921ddd5a3b29278d6e51ab"
     },
     {
-      "path": "project-template/src/SpatialLayer.tsx",
-      "bytes": 3185,
-      "sha256": "9b2486c8b3827bf8c36a93ab9e320c23ac8dd23836d6035bb9f70ef8d5c9d092"
+      "path": "project-template/src/TextTrack.tsx",
+      "bytes": 1607,
+      "sha256": "94b4186fa94517ecd95655a5ec5173e2f369be1c9087cf54a3799bb0959a320e"
     },
     {
-      "path": "project-template/src/SubjectLayer.tsx",
-      "bytes": 4054,
-      "sha256": "b76a29b8a69c4ae07a623f526ff95fef6123ae7c54b4cefdbcd6b2889a410896"
-    },
-    {
-      "path": "project-template/tests/core.test.mjs",
-      "bytes": 4193,
-      "sha256": "4a8fcdaaacc8b51dc423bab0d3982f5063648bb69e72794652f1b4ebf20bd9a5"
-    },
-    {
-      "path": "project-template/tests/presentation.test.mjs",
-      "bytes": 8854,
-      "sha256": "25da2138dff6ed6ec622a2ae1860cca7ecd6681abe11c5ca5b0e76eb6019d7f6"
+      "path": "project-template/tests/scene-system.test.mjs",
+      "bytes": 5422,
+      "sha256": "20ea4c480bea070c67d664102e60d2f15a24d446aa723c02c1e50584e4babd23"
     },
     {
       "path": "project-template/tools/prepare_audio.py",
@@ -174,15 +177,26 @@
       "sha256": "8a6bbc392aa1a3513256c159292db18458c48aa9305c52159971fa151833b992"
     },
     {
-      "path": "examples/random-walk.json",
-      "bytes": 4465,
-      "sha256": "9fbb26d30ff49aa06337f1a8487da344129a2033b7db38dbcc619a5ff074ed58"
+      "path": "styles/cinematic-spatial.md",
+      "bytes": 1462,
+      "sha256": "0a57e94039b6ef36d19101c4ef8e8b7de3b601669cd845f89793e66205b55058"
+    },
+    {
+      "path": "styles/index.json",
+      "bytes": 352,
+      "sha256": "f8b1077e6bcdc5d8fc4117a3cb7e92e555e9c9b054b31e549638a4d933b08a8a"
+    },
+    {
+      "path": "validation-report.json",
+      "bytes": 1173,
+      "sha256": "20a903f681237a4409ace2a3a6eb2fb66986355664513c08fc8523298ca39edf"
     }
   ],
-  "projectTemplate": "project-template/",
-  "examples": [
-    "examples/random-walk.json"
-  ],
-  "optionalBlender": "project-template/blender/build_scene.py",
-  "presentation": "full-dynamic for newly created projects; legacy compatibility retained"
+  "excludes": [
+    "reference videos",
+    "final films",
+    "credentials",
+    "runtime caches",
+    "historical visual components"
+  ]
 }

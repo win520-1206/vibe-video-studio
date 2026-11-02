@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 3,
+  "project": {
+    "title": "Renderer diagnostics",
+    "episodeCount": 1
+  },
+  "video": {
+    "width": 960,
+    "height": 540,
+    "fps": 24
+  },
+  "presentation": {
+    "mode": "full-dynamic"
+  },
+  "audio": {
+    "required": true,
+    "file": "demo-music.wav",
+    "cropStartSeconds": 0
+  },
+  "episodes": [
+    {
+      "id": "E1",
+      "durationSeconds": 8,
+      "events": [],
+      "scenes": [
+        {
+          "id": "test-0",
+          "kind": "authored",
+          "renderer": "wave-test",
+          "start": 0,
+          "end": 4,
+          "anchorIds": [],
+          "object": "diagnostic wave",
+          "action": "propagate",
+          "before": "initial geometry",
+          "after": "changed geometry",
+          "understanding": "Renderer interface only, no scientific claim",
+          "science": "Original technical diagnostic; not a scientific explanation",
+          "captions": [
+            {
+              "id": "c0",
+              "text": "接口测试：波形传播",
+              "start": 0.5,
+              "end": 3.5
+            }
+          ]
+        },
+        {
+          "id": "test-1",
+          "kind": "authored",
+          "renderer": "branch-test",
+          "start": 4,
+          "end": 8,
+          "anchorIds": [],
+          "object": "diagnostic branches",
+          "action": "diverge",
+          "before": "initial geometry",
+          "after": "changed geometry",
+          "understanding": "Renderer interface only, no scientific claim",
+          "science": "Original technical diagnostic; not a scientific explanation",
+          "captions": [
+            {
+              "id": "c1",
+              "text": "接口测试：路径展开",
+              "start": 4.5,
+              "end": 7.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

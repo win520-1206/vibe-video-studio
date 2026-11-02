@@ -2,7 +2,7 @@
 
 ## 默认素材与优先级
 
-用户本次提供或指定的曲目优先；没有换曲则使用assets/defaults.json登记的默认音乐。本Skill默认音乐来自用户此前概率主题参考视频的完整音轨，资产为assets/music/default-reference.m4a，无重编码提取。它不是经过音源分离的纯音乐stem。
+用户本次提供或指定的曲目优先；没有换曲则使用assets/defaults.json登记的默认音乐。本机默认已改为用户提供的《秋成-若如初见（开智小曲）》下载版，资产为assets/music/default-reference.mp3，逐字节复制原MP3，没有从参考视频抽音轨，也没有做音源分离。资源说明和时长见assets/music/analysis-summary.json；不能在未审听时断言它是无人声的纯伴奏。公开包不附音轨。
 
 默认风格是cinematic-spatial；音乐与风格分别选择。用户可以保留风格换音乐，或保留音乐换风格，不把两者绑死。
 

@@ -5,7 +5,7 @@ export function defaultCues(scene,fps){
  const cues=[];
  for(const source of scene.captions||[]){const parts=splitPhrases(source.text),total=Array.from(source.text).length;let consumed=0,previous=Math.round(source.start*fps);
   parts.forEach((text,i)=>{consumed+=Array.from(text).length;const end=i===parts.length-1?Math.round(source.end*fps):Math.round(source.start*fps+(source.end-source.start)*fps*consumed/total);const span=(end-previous)/fps;
-   cues.push({id:`${source.id}-part-${i+1}`,sourceId:source.id,text,start:previous/fps,end:end/fps,role:'main',placement:i%2?'right':'left',effect:i%2?'path':'mask',enterSeconds:Math.min(.25,span*.18),exitSeconds:Math.min(.18,span*.15),eventId:source.eventId,emphasis:source.emphasis});previous=end;
+   cues.push({id:`${source.id}-part-${i+1}`,sourceId:source.id,text,start:previous/fps,end:end/fps,role:'main',placement:'center',effect:'none',enterSeconds:Math.min(.25,span*.18),exitSeconds:Math.min(.18,span*.15),eventId:source.eventId,emphasis:source.emphasis});previous=end;
   });
  }
  return cues;
@@ -37,7 +37,7 @@ export function inspectTextPlan(scene,fps){const errors=[],warnings=[],cues=cues
   for(const key of ['x','y','width','fontScale'])if(q[key]!==undefined&&!Number.isFinite(q[key]))errors.push(`${q.id}: invalid ${key}`);
   if(q.width!==undefined&&q.width<=0||q.fontScale!==undefined&&q.fontScale<=0)errors.push(`${q.id}: nonpositive text dimensions`);
   const win=cueWindow(q,fps);if(!Number.isFinite(win.readEnd-win.readStart)||win.readEnd-win.readStart<1/fps)errors.push(`${q.id}: no stable reading window`);
-  if(q.placement==='anchor'&&(!q.anchor?.id||!/^walker-\d+$/.test(q.anchor.id)))errors.push(`${q.id}: missing/unknown anchor`);
+  if(q.placement==='anchor'&&(!q.anchor?.id||!scene.anchorIds?.includes(q.anchor.id)))errors.push(`${q.id}: missing/unknown anchor`);
   if(q.effect==='follow'&&q.placement!=='anchor')errors.push(`${q.id}: follow effect requires an object anchor`);
   if(q.sourceId&&!sources.some(c=>c.id===q.sourceId))errors.push(`${q.id}: unknown sourceId`);
   if(!q.sourceId&&!q.annotation)errors.push(`${q.id}: untraced text; reference script source or mark annotation`);

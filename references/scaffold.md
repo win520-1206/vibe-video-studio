@@ -1,43 +1,25 @@
-# 独立工程脚手架
+# 无预设视觉场景的工程底座
 
-## 创建与运行
+`node scripts/create-project.mjs <新目录>` 创建独立工程；目标非空停止。保留Remotion、统一帧时间、音乐分析、事件、完整确认稿、布局测量、局部渲染与打包工具。默认的 `shared/scene-registry.mjs` 与 `src/scenes.tsx` 注册表为空，不生成背景球、点阵、轨迹或固定片头。先读[主题设计](theme-led-design.md)。
 
-在用户作品目录之外保留 Skill。用 Node 调用 `scripts/create-project.mjs <新目录>`；它只接受不存在或空的目标，复制自包含模板及音频辅助脚本，不自动安装依赖。
+## 编写本题材的镜头
 
-- 默认生成待填写的 schemaVersion 2 约定；集数、画幅、帧率、片长仍需本次问答。
-- `--contract <配置文件>` 创建已填写项目；结构先校验再复制。
-- `--music <素材>` 把指定曲目复制到项目 public，优先于默认音乐。
-- 无指定曲目时，私人安装版若有已登记音轨则复制到工程；公开版缺少音轨时提示用户提供，不能下载替代歌曲。
-- `--demo` 是独立验证例子，显式采用其示例参数和本地合成音轨，不代表新项目默认值。
+配置使用 `kind: authored` 和项目自定的 `renderer` ID。先在 shared/scene-registry.mjs 注册 `{state(ctx), validate(scene)}`，再在 src/scenes.tsx 用同一ID注册React视图。科学模型放项目自己的shared模块，视图可选SVG、Canvas、WebGL或混合技术。状态是纯函数，可任意帧重建。
 
-创建后进入工程：`npm ci`；`python -m pip install -r requirements.txt`。先确认脚本清单，再 `npm run analyze:music`、`npm run doctor`、`npm run dev`、`npm run stills`、`npm run render`、`npm run check`、`npm run package`。具体命令参数在生成工程 README 中。依赖锁来自实测兼容的一组版本，不代表最新版建议。
+state返回 `{objects, protectedRegions, phase, expected, metrics}`。objects的每项为稳定id与归一化屏幕x/y；可另含worldX/worldY供排除相机运动的检查。protectedRegions用 `{id,x,y,w,h}`，保护主要对象。phase为prepare/develop/hold等语义阶段；expected为subject/hold/media。metrics只放解释过程的可审查量，不能靠逐帧时间戳让静止主体通过检查。复杂形变须提供代表性特征点和模型量；Blender要结合最终抽帧。
 
-## 数据和接口
+场景声明 `anchorIds: []`，使用锚定时填入对应稳定ID，运行时对象缺失会报错。main文字在阅读开始位置冻结，label可跟随。完整确认稿仍使用captions及script-manifest；textCues引用sourceId。先规范原稿，再按动作设计位置、出现时间和字效，不自动交替左右布局。
 
-沿用 v2 project/video/audio/style/keyEvents/output/workflow 字段，新增 episodes。每集包含 id、durationSeconds、scenes、events 和可选 audio 覆盖；顶层 video.durationSeconds 可以作为所有分集共同片长。各集最终音频配置为顶层与分集覆盖的合并。
+上下文包含frame/fps/width/height/time/localTime/scene/episode/seed/style/signal/event。跨镜接续由本题材共享模型和全片时间设计，不默认切换后重复入场。换曲/选段/帧率变化需重算特征；局部渲染仍按全片绝对帧取音频。
 
-scenes 用绝对分集秒数 start/end 覆盖全片半开区间，字幕也是绝对秒数。事件使用 id/atSeconds；字幕及场景引用 eventId/eventIds。现有 top-level keyEvents 保留作为制作约定，若要驱动动画必须显式列入本集 events，不能猜测它属于哪集。
+## 命令与诊断
 
-统一 `atFrame` 上下文包含 frame/fps/width/height/time/localTime/scene/episode/seed/style/signal/event。模型单独输出；渲染无上一帧依赖。新增题材在共享校验和 Film 中注册自己的 scene kind；模板 walk/distribution 是示范，不是对所有主题的限制。
+生成后运行npm ci；安装requirements.txt；填写本次配置与科学依据。`doctor`检查环境并实渲染；`analyze:music`生成音乐特征和混音；`dev`预览；`stills`抽帧；`render`导出；`check`检查实际文件；`package`打包。字体、编码器、浏览器通过实际检测或环境变量指定。未实现renderer时报错，不用通用场景补位。
 
-音频特征用完整分集时间；图表和过程可用镜头局部时间；片段渲染的 --from/--to 是绝对分集帧号且两端包含。Blender 接口见 [blender.md](blender.md)。
+`--demo`仅将assets/diagnostics中的两个原创接口测试复制到独立工程：一条传播波形与多路径展开，用于验证不同renderer、时间轴、文字与音乐管线。它们不解释科学，也不是成片质量样板。正常创建不会带入这些视图或模型。演示的8秒/24fps/横屏不是项目默认值。
 
-## 验收和证据
+## 迁移与Blender
 
-`script-manifest.json` 是确认稿快照。创建时从初始输入建立；用户确认后独立维护，检查时禁止从实际场景反向生成，避免漏句后自检仍通过。
+此版清除旧视觉组件，旧walk/distribution配置不能直接交给新底座渲染。既有作品的工程与依赖原样保留，继续使用自己的引擎。主动迁移时需为其主题重新实现renderer并核验模型，禁止静默替换。新配置schemaVersion为3。
 
-静态检查：必填值、帧对齐、场景连续、确认稿完整、片段覆盖、主要文案并发、稳定阶段阅读密度提示、事件引用、音效越界/并发、资产存在、音频缓存有效性。
-
-动态检查：按场景/字幕中点及事件前后帧渲染，采集真实文字盒和画面，检查文字越界与互相重叠。WebGL 输出模型状态只作辅助证据；它不代表图形已被正确绘出。
-
-成片检查：合同与视频哈希、完整帧解码、规格、音轨时长、PCM 峰值/RMS、关键边界像素证据。黑场和静止帧是复核线索，不武断判为错误。报告保留科学、连续观看和审听状态；技术通过不自动更新这些状态。
-
-检查思路参考 [LuZhong-Li 的验收工具](https://github.com/LuZhong-Li/vibe-knowledge-video-skill/blob/main/templates/tools/README.md)。本实现为 Remotion/React/WebGL 重新编写，不依赖其 HTML 钩子，不复制案例文案、常量或阈值。
-
-## 交付边界
-
-项目 package 包含作品媒体及源码，适合交给本次用户。公开 Skill 包仅包含模板、规范、工具及文本例子，不包含私人音轨或原成片。打包不会推送 GitHub。
-
-## 动态文案与兼容
-
-新建空白/示例工程写入presentation.mode=full-dynamic；导入旧配置时不擅自迁移，无扩展字段按legacy渲染。captions与独立确认稿仍为母本，SRT按母本导出；textCues负责分时呈现和构图。参见[动态文案与主体动作](dynamic-text-and-motion.md)。校验记录区分模型坐标、相机和装饰，关键帧覆盖文字进入、阅读、退出与事件边界。
+Blender仍是可选逐镜路线，kind为blender时沿用media帧率、帧数、源起始帧与事件映射，详见[Blender](blender.md)。没选Blender不检测或安装它。其他技术检查和手工审看范围见[验收](verification.md)。
