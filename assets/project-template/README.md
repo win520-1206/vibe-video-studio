@@ -11,3 +11,8 @@ Commands: doctor, dev, analyze:music, stills, render, check, package. Configure 
 The --demo creator option copies isolated wave/branch diagnostics and a synthesized test track; these are not scientific scenes or production defaults. Existing projects retain their own engine; old walk/distribution scenes are not included here.
 
 Blender is optional. Selected media must record source frame, fps, frames and scientific benefit/cost. Do not silently substitute missing assets. Technical checks do not replace scientific review, continuous viewing or listening.
+
+
+## Creative planning
+
+After setting episode/scene/caption/event IDs, run npm run plan:shots. Complete creative-plan.json: question, mechanism, insight, emotional connection and ending; per-shot action, viewer change, emotional beat and transition. No copied time fields. Existing JSON or docs reading copy is preserved. Run npm run check:creative to validate coverage, references, approved script and event windows; the updated reading copy is qa/creative-plan.md. These commands work before authoring renderers. Other commands remain compatible without the plan. Manual scientific, aesthetic and listening judgments are never automatically approved.

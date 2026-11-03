@@ -1,5 +1,5 @@
 {
-  "purpose": "Topic-authored video workflow and scene-free production infrastructure",
+  "purpose": "Unified knowledge, authored animation and emotional narrative workflow",
   "defaultMusic": {
     "asset": "music/default-reference.mp3",
     "included": false,
@@ -43,8 +43,8 @@
     },
     {
       "path": "project-contract.example.json",
-      "bytes": 1182,
-      "sha256": "3fb89b7db8874c6be84c52d2d7479b133d8c55b193a511ec18d2f7b8b3e37bcd"
+      "bytes": 1215,
+      "sha256": "b1484bc1b4bf9a838c99935bbbcfd750a4a5569645077061e045797bb189d091"
     },
     {
       "path": "project-template/.gitignore",
@@ -58,8 +58,8 @@
     },
     {
       "path": "project-template/docs/visual-design.md",
-      "bytes": 537,
-      "sha256": "1154b914b47b2971c1e88c879e03d3aa53bea6ad79de301cd4d2579205ea604f"
+      "bytes": 854,
+      "sha256": "f4e946319d07434eca8d9fbd097634b2657985661f428b1352d730ce7d25d447"
     },
     {
       "path": "project-template/package-lock.json",
@@ -68,13 +68,13 @@
     },
     {
       "path": "project-template/package.json",
-      "bytes": 917,
-      "sha256": "a29b303d50bf62a41760567cdc7b7ac1d18e1864a7d20bec13644c0963be6da1"
+      "bytes": 1028,
+      "sha256": "6a24205e2d269162c8a54f1ff49b2d5a60e95b705b46a774df36ed005a3ed75d"
     },
     {
       "path": "project-template/README.md",
-      "bytes": 1817,
-      "sha256": "a9d72d7256e2e56f79c0d9295abe7912cd3e2606a26cf110e6001c06c0a56390"
+      "bytes": 2475,
+      "sha256": "af175b7600efea2956367ca6fad4006c64e4adc204c23d04d0c8cd5c087ba28b"
     },
     {
       "path": "project-template/remotion.config.ts",
@@ -93,13 +93,18 @@
     },
     {
       "path": "project-template/scripts/cli.mjs",
-      "bytes": 7315,
-      "sha256": "9589bfae9542397745eb288ad847146894828ac6ff1623f5d6438b5fcc70abbd"
+      "bytes": 7336,
+      "sha256": "f7eb9a32663a59724a2d5ecb9d7fa0dae43a9b31f06ed9b32039b3a2f6575c44"
     },
     {
       "path": "project-template/scripts/common.mjs",
       "bytes": 4879,
       "sha256": "6445a8879c8dbd45c0b259230f707833b45200b4322f998bb893eb16ebffd241"
+    },
+    {
+      "path": "project-template/scripts/creative.mjs",
+      "bytes": 1510,
+      "sha256": "917575f7158ec606a0676d2ce9281d0f2e073cfb0af27fb9a3590de0d62cfc3f"
     },
     {
       "path": "project-template/scripts/renderer.mjs",
@@ -110,6 +115,11 @@
       "path": "project-template/scripts/validate.mjs",
       "bytes": 5980,
       "sha256": "909e6bd59333a5e035fbcf97b7cf1af8f1f7fcf1b85f15d25fac4dfd2f9d2b23"
+    },
+    {
+      "path": "project-template/shared/creative.mjs",
+      "bytes": 5378,
+      "sha256": "c9fa3d576e086b20ddd90746494961fa471e7dd3320cf56b2a452bdc5898a573"
     },
     {
       "path": "project-template/shared/presentation.mjs",
@@ -157,9 +167,14 @@
       "sha256": "94b4186fa94517ecd95655a5ec5173e2f369be1c9087cf54a3799bb0959a320e"
     },
     {
+      "path": "project-template/tests/creative.test.mjs",
+      "bytes": 4181,
+      "sha256": "ce26e9eb6be3513f7aa9de0e94c8e24560d29fb7db0a732254ab230bb768a3da"
+    },
+    {
       "path": "project-template/tests/scene-system.test.mjs",
-      "bytes": 5422,
-      "sha256": "20ea4c480bea070c67d664102e60d2f15a24d446aa723c02c1e50584e4babd23"
+      "bytes": 5683,
+      "sha256": "ec3ad61be7c1c0de9b39ca88a52986ba5cde610155c863333b64e9b2a1b0a3e6"
     },
     {
       "path": "project-template/tools/prepare_audio.py",
@@ -177,6 +192,76 @@
       "sha256": "8a6bbc392aa1a3513256c159292db18458c48aa9305c52159971fa151833b992"
     },
     {
+      "path": "studies/feedback/contract.json",
+      "bytes": 5490,
+      "sha256": "115ed6dedb3cd6891e3e7b0c4e831b6da3c9743c4f421ca3828d6dc9c79dea8d"
+    },
+    {
+      "path": "studies/feedback/creative-plan.json",
+      "bytes": 1247,
+      "sha256": "c3997894f7edd36138da13bd2122e2d2f8aa1fc08657fc49b4a8eaa9d002def0"
+    },
+    {
+      "path": "studies/feedback/model.mjs",
+      "bytes": 1035,
+      "sha256": "1f9eda5b1915eb9eb2994e3ec048e0da6eeab23399164b218d5bb62c3a34f7eb"
+    },
+    {
+      "path": "studies/feedback/model.test.mjs",
+      "bytes": 794,
+      "sha256": "8aa98950168b3152377a5d244971af810af789bb7e47c9071c3889bee124f300"
+    },
+    {
+      "path": "studies/feedback/scene-registry.mjs",
+      "bytes": 98,
+      "sha256": "d8615a43f81515b4ec64599421680a94917832fc788632a5a22b88fe2882d20e"
+    },
+    {
+      "path": "studies/feedback/scenes.tsx",
+      "bytes": 3616,
+      "sha256": "8176aa2f2fe33fc44c3fa493e4863e943148a42fbd5eda6f8d7b95604488fbfa"
+    },
+    {
+      "path": "studies/feedback/sources.md",
+      "bytes": 1094,
+      "sha256": "f05d179b95df399d34819f6e79e9d36afe181f05c002e97daf6b2ebe7c9a28fc"
+    },
+    {
+      "path": "studies/interference/contract.json",
+      "bytes": 5026,
+      "sha256": "99864990f7a40533c66d7b05fe7656c8191ddbc44e367c010a19865c4b93edbe"
+    },
+    {
+      "path": "studies/interference/creative-plan.json",
+      "bytes": 1127,
+      "sha256": "c2199ef7ad1d115845e783907962f67b935b20ca8123c5611c85e1d86d8e62c6"
+    },
+    {
+      "path": "studies/interference/model.mjs",
+      "bytes": 726,
+      "sha256": "4e3fc26e7b9ab7e4d09e3504a7aedac92afcbe1db326c0ffe54271d7761672c6"
+    },
+    {
+      "path": "studies/interference/model.test.mjs",
+      "bytes": 852,
+      "sha256": "5015356af14960bfe9a1336aa786934ae0c1e8509d2cc73453f9f24c33f34c60"
+    },
+    {
+      "path": "studies/interference/scene-registry.mjs",
+      "bytes": 99,
+      "sha256": "e1d2adcb877dc6dd4ea854191d95d2b8939d50aee043718bf0d614200b079956"
+    },
+    {
+      "path": "studies/interference/scenes.tsx",
+      "bytes": 2819,
+      "sha256": "a8c914e6a88711a00f1c3dc0fb5587082a079eb2c8496f7b02ebec415b2fba05"
+    },
+    {
+      "path": "studies/interference/sources.md",
+      "bytes": 803,
+      "sha256": "eb319da54f10ad0ae30ef8f39fe7af2911be35657b9a11da44c14139ea5ecb77"
+    },
+    {
       "path": "styles/cinematic-spatial.md",
       "bytes": 1462,
       "sha256": "0a57e94039b6ef36d19101c4ef8e8b7de3b601669cd845f89793e66205b55058"
@@ -188,8 +273,8 @@
     },
     {
       "path": "validation-report.json",
-      "bytes": 1173,
-      "sha256": "20a903f681237a4409ace2a3a6eb2fb66986355664513c08fc8523298ca39edf"
+      "bytes": 2735,
+      "sha256": "9d43388a75c6e26f51b4ce0436cf58441b77341d345b7d36263c825c903fbc43"
     }
   ],
   "excludes": [

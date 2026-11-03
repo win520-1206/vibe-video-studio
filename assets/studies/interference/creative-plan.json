@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "openingQuestion": "相遇，会让彼此消失吗？",
+    "coreMechanism": "位移相消不等于波被消灭",
+    "insight": "将消失与瞬时相消区分开",
+    "emotionalConnection": "从担心相遇会抹去彼此，到看见过程仍在继续；仅作感受的启发",
+    "endingResponse": "眼前的平静，未必是终点。（作者感悟，不是普适物理或人生定律）"
+  },
+  "shots": [
+    {
+      "episodeId": "E1",
+      "sceneId": "mechanism",
+      "captionIds": [
+        "line-0",
+        "line-1",
+        "line-2",
+        "line-3",
+        "line-4"
+      ],
+      "eventIds": [
+        "cancel"
+      ],
+      "action": "相遇叠加、瞬时相消、穿过后继续传播",
+      "viewerBefore": "相遇，会让彼此消失吗？",
+      "viewerAfter": "位移相消不等于波被消灭",
+      "emotionalBeat": "从担心相遇会抹去彼此，到看见过程仍在继续；仅作感受的启发",
+      "transition": "同一模型状态贯穿片段，结尾保留对象结果与文字阅读窗口"
+    }
+  ]
+}

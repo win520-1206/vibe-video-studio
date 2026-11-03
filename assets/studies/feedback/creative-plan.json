@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "openingQuestion": "偏离目标，就意味着失败吗？",
+    "coreMechanism": "理想积分对象的负比例反馈使偏差指数衰减",
+    "insight": "将偏离与无法调整区分开",
+    "emotionalConnection": "从害怕偏离到理解可以依据反馈继续修正；不以控制理论证明人生结论",
+    "endingResponse": "调整方向，也是一种前进。（作者感悟，不是普适物理或人生定律）"
+  },
+  "shots": [
+    {
+      "episodeId": "E1",
+      "sceneId": "mechanism",
+      "captionIds": [
+        "line-0",
+        "line-1",
+        "line-2",
+        "line-3",
+        "line-4"
+      ],
+      "eventIds": [
+        "engage",
+        "disturbance"
+      ],
+      "action": "测量位置偏差、比例修正、外部位移扰动后继续纠偏",
+      "viewerBefore": "偏离目标，就意味着失败吗？",
+      "viewerAfter": "理想积分对象的负比例反馈使偏差指数衰减",
+      "emotionalBeat": "从害怕偏离到理解可以依据反馈继续修正；不以控制理论证明人生结论",
+      "transition": "同一模型状态贯穿片段，结尾保留对象结果与文字阅读窗口"
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 3,
+  "project": {
+    "title": "修正的方向",
+    "theme": "feedback",
+    "audience": "高校与一般观众",
+    "purpose": "知识、动画与情绪融合的独立验证片段",
+    "episodeCount": 1
+  },
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30
+  },
+  "presentation": {
+    "mode": "full-dynamic"
+  },
+  "audio": {
+    "required": true,
+    "narration": false,
+    "cropStartSeconds": 92.96666666666667,
+    "gainDb": -7,
+    "listeningStatus": "not_reviewed"
+  },
+  "style": {
+    "styleId": "cinematic-spatial"
+  },
+  "episodes": [
+    {
+      "id": "E1",
+      "durationSeconds": 18,
+      "events": [
+        {
+          "id": "engage",
+          "atSeconds": 6
+        },
+        {
+          "id": "disturbance",
+          "atSeconds": 11
+        }
+      ],
+      "scenes": [
+        {
+          "id": "mechanism",
+          "kind": "authored",
+          "renderer": "feedback-carriage",
+          "start": 0,
+          "end": 18,
+          "anchorIds": [],
+          "object": "位置控制滑块与目标",
+          "before": "滑块偏离目标且反馈尚未开启",
+          "action": "测量位置偏差、比例修正、外部位移扰动后继续纠偏",
+          "after": "偏差衰减但有限时间内不精确为零",
+          "understanding": "理想积分对象的负比例反馈使偏差指数衰减",
+          "science": "教学模型；完整依据和生活类比边界见docs/sources.md",
+          "eventIds": [
+            "engage",
+            "disturbance"
+          ],
+          "captions": [
+            {
+              "id": "line-0",
+              "text": "偏离目标，就意味着失败吗？",
+              "start": 0.6,
+              "end": 3.7
+            },
+            {
+              "id": "line-1",
+              "text": "理想模型中，先测量，再修正。",
+              "start": 4.1,
+              "end": 7.1,
+              "eventId": "engage",
+              "emphasis": [
+                "修正"
+              ]
+            },
+            {
+              "id": "line-2",
+              "text": "偏差越小，修正越弱。",
+              "start": 7.5,
+              "end": 10.5
+            },
+            {
+              "id": "line-3",
+              "text": "扰动出现，反馈继续纠偏。",
+              "start": 11.2,
+              "end": 14.3,
+              "eventId": "disturbance",
+              "emphasis": [
+                "纠偏"
+              ]
+            },
+            {
+              "id": "line-4",
+              "text": "调整方向，也是一种前进。",
+              "start": 14.7,
+              "end": 17.7
+            }
+          ],
+          "textCues": [
+            {
+              "id": "line-0-display",
+              "sourceId": "line-0",
+              "text": "偏离目标，就意味着失败吗？",
+              "start": 0.6,
+              "end": 3.7,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "mask",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            },
+            {
+              "id": "line-1-display",
+              "sourceId": "line-1",
+              "text": "理想模型中，先测量，再修正。",
+              "start": 4.1,
+              "end": 7.1,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "relay",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2,
+              "eventId": "engage",
+              "emphasis": [
+                "修正"
+              ]
+            },
+            {
+              "id": "line-2-display",
+              "sourceId": "line-2",
+              "text": "偏差越小，修正越弱。",
+              "start": 7.5,
+              "end": 10.5,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "mask",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            },
+            {
+              "id": "line-3-display",
+              "sourceId": "line-3",
+              "text": "扰动出现，反馈继续纠偏。",
+              "start": 11.2,
+              "end": 14.3,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "relay",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2,
+              "eventId": "disturbance",
+              "emphasis": [
+                "纠偏"
+              ]
+            },
+            {
+              "id": "line-4-display",
+              "sourceId": "line-4",
+              "text": "调整方向，也是一种前进。",
+              "start": 14.7,
+              "end": 17.7,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "relay",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

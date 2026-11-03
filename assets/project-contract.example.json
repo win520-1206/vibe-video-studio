@@ -6,7 +6,8 @@
     "theme": null,
     "audience": null,
     "purpose": null,
-    "episodeCount": null
+    "episodeCount": null,
+    "intendedReflection": null
   },
   "video": {
     "width": null,

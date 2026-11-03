@@ -23,3 +23,8 @@ state返回 `{objects, protectedRegions, phase, expected, metrics}`。objects的
 此版清除旧视觉组件，旧walk/distribution配置不能直接交给新底座渲染。既有作品的工程与依赖原样保留，继续使用自己的引擎。主动迁移时需为其主题重新实现renderer并核验模型，禁止静默替换。新配置schemaVersion为3。
 
 Blender仍是可选逐镜路线，kind为blender时沿用media帧率、帧数、源起始帧与事件映射，详见[Blender](blender.md)。没选Blender不检测或安装它。其他技术检查和手工审看范围见[验收](verification.md)。
+
+
+## 知识、动画与情绪
+
+增加plan:shots和check:creative。前者从原始配置生成不覆盖的创作表，后者核查并刷新qa阅读版，无需先实现renderer。独立示范用scripts/create-study.mjs按ID创建，正常项目不自动复制；详见[融合叙事](creative-narrative.md)。

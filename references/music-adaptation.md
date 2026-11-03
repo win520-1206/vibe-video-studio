@@ -52,3 +52,8 @@ python scripts/music_structure.py --features audio-features.json --output music-
 缓存应关联所选曲目的路径或哈希、截取起终点、播放速度和分析fps。任一改变后重新生成特征及beat-map，不能套用默认曲旧数据。
 
 事件表记录musicSourceSeconds、timelineSeconds、frame及事件用途。导出后实际检查落点前后帧、音轨是否偏移、声音是否完整；页面进度和源码时刻不能代替成片证据。
+
+
+## 知识、动画与情绪
+
+默认曲沿用本机下载版。示范选段和重音为本片的分析候选，不成为其他作品的卡点。情绪弧与理解弧一起设计；因果与阅读停顿优先于密集切拍。

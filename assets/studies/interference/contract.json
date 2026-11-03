@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 3,
+  "project": {
+    "title": "相遇之后",
+    "theme": "interference",
+    "audience": "高校与一般观众",
+    "purpose": "知识、动画与情绪融合的独立验证片段",
+    "episodeCount": 1
+  },
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30
+  },
+  "presentation": {
+    "mode": "full-dynamic"
+  },
+  "audio": {
+    "required": true,
+    "narration": false,
+    "cropStartSeconds": 19.9,
+    "gainDb": -7,
+    "listeningStatus": "not_reviewed"
+  },
+  "style": {
+    "styleId": "cinematic-spatial"
+  },
+  "episodes": [
+    {
+      "id": "E1",
+      "durationSeconds": 18,
+      "events": [
+        {
+          "id": "cancel",
+          "atSeconds": 8
+        }
+      ],
+      "scenes": [
+        {
+          "id": "mechanism",
+          "kind": "authored",
+          "renderer": "pulse-interference",
+          "start": 0,
+          "end": 18,
+          "anchorIds": [],
+          "object": "线性介质中的反向位移脉冲",
+          "before": "两个脉冲接近",
+          "action": "相遇叠加、瞬时相消、穿过后继续传播",
+          "after": "脉冲分离",
+          "understanding": "位移相消不等于波被消灭",
+          "science": "教学模型；完整依据和生活类比边界见docs/sources.md",
+          "eventIds": [
+            "cancel"
+          ],
+          "captions": [
+            {
+              "id": "line-0",
+              "text": "相遇，会让彼此消失吗？",
+              "start": 0.6,
+              "end": 3.7
+            },
+            {
+              "id": "line-1",
+              "text": "在线性介质中，位移相加。",
+              "start": 4.1,
+              "end": 6.8
+            },
+            {
+              "id": "line-2",
+              "text": "反向位移，此刻相消。",
+              "start": 7.1,
+              "end": 10.3,
+              "eventId": "cancel",
+              "emphasis": [
+                "相消"
+              ]
+            },
+            {
+              "id": "line-3",
+              "text": "波仍穿过彼此，继续传播。",
+              "start": 10.8,
+              "end": 14
+            },
+            {
+              "id": "line-4",
+              "text": "眼前的平静，未必是终点。",
+              "start": 14.5,
+              "end": 17.6
+            }
+          ],
+          "textCues": [
+            {
+              "id": "line-0-display",
+              "sourceId": "line-0",
+              "text": "相遇，会让彼此消失吗？",
+              "start": 0.6,
+              "end": 3.7,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "mask",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            },
+            {
+              "id": "line-1-display",
+              "sourceId": "line-1",
+              "text": "在线性介质中，位移相加。",
+              "start": 4.1,
+              "end": 6.8,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "relay",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            },
+            {
+              "id": "line-2-display",
+              "sourceId": "line-2",
+              "text": "反向位移，此刻相消。",
+              "start": 7.1,
+              "end": 10.3,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "mask",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2,
+              "eventId": "cancel",
+              "emphasis": [
+                "相消"
+              ]
+            },
+            {
+              "id": "line-3-display",
+              "sourceId": "line-3",
+              "text": "波仍穿过彼此，继续传播。",
+              "start": 10.8,
+              "end": 14,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "relay",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            },
+            {
+              "id": "line-4-display",
+              "sourceId": "line-4",
+              "text": "眼前的平静，未必是终点。",
+              "start": 14.5,
+              "end": 17.6,
+              "placement": "center",
+              "x": 0.08,
+              "y": 0.13,
+              "width": 0.84,
+              "role": "main",
+              "effect": "relay",
+              "enterSeconds": 0.3,
+              "exitSeconds": 0.2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
