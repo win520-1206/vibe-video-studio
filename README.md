@@ -1,4 +1,4 @@
-# vibe-cinematic-video
+# vibe-video-studio
 
 **让知识成为可观看的过程，让音乐参与理解。**
 
@@ -29,26 +29,28 @@ node scripts/create-study.mjs feedback ../feedback-study --music /path/to/your-m
 
 ## 安装
 
+Skill 名称为 `vibe-video-studio`，GitHub 仓库地址为 `win520-1206/vibe-cinematic-video`；Skill 与仓库分别命名。
+
 安装Node.js后，可通过skills CLI安装：
 
 ```bash
-npx skills add win520-1206/vibe-cinematic-video --skill vibe-cinematic-video
+npx skills add win520-1206/vibe-cinematic-video --skill vibe-video-studio
 ```
 
 用户级Codex安装：
 
 ```bash
-npx skills add win520-1206/vibe-cinematic-video --skill vibe-cinematic-video --agent codex --global
+npx skills add win520-1206/vibe-cinematic-video --skill vibe-video-studio --agent codex --global
 ```
 
 此命令通过npm运行skills安装器，从GitHub读取Skill；本仓库不需要另行发布同名npm包。也可手动将包含SKILL.md的整个文件夹放入助手的skills目录。发现网站的展示由其索引规则决定，安装命令并不等于已经被所有网站收录。
 
 ## 调用
 
-在支持Skill的助手中调用 `$vibe-cinematic-video`，说明主题、受众用途、集数、各集时长、横竖屏、素材、音乐及先样片还是整片。缺少关键参数时助手会集中询问，已有选择继续沿用。题材、集数、片长和高潮时刻没有固定默认值。
+在支持Skill的助手中调用 `$vibe-video-studio`，说明主题、受众用途、集数、各集时长、横竖屏、素材、音乐及先样片还是整片。缺少关键参数时助手会集中询问，已有选择继续沿用。题材、集数、片长和高潮时刻没有固定默认值。
 
 ```text
-使用 $vibe-cinematic-video 做一部讲反馈与稳定性的知识短片。
+使用 $vibe-video-studio 做一部讲反馈与稳定性的知识短片。
 先分析我给的音乐和参考，按机制设计对象变化。
 避免沿用上一部的粒子球，先交可播放样片。
 ```

@@ -13,8 +13,8 @@
   "files": [
     {
       "path": "defaults.json",
-      "bytes": 1084,
-      "sha256": "41ecc59a04a39c87d4ca185d055b859cda8dfaa34c5e5e2635ed13a4182c6f12"
+      "bytes": 1113,
+      "sha256": "7f3e1e46f65be40d1789c76770f8f6e65e5d8840d619b21649aa91c321e9ec33"
     },
     {
       "path": "diagnostics/contract.json",

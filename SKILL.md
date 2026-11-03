@@ -1,9 +1,9 @@
 ---
-name: vibe-cinematic-video
+name: vibe-video-studio
 description: 按主题原创设计融合知识、模型动画与情绪表达的科学可视化视频，结合故事、动态文字和音乐互动，使用Remotion与按需选用的Canvas、WebGL或Blender完成工程与交付。适用于科普短剧、知识短片及改善PPT感或雷同动画的任务。
 ---
 
-# vibe-cinematic-video
+# vibe-video-studio
 
 让观众看见问题、理解机制，并在过程中产生情绪与思考。默认融合知识、动画和情绪，不分科普或哲理模式。复用制作工具，每个作品重新设计视觉对象与过程；禁止把上一作品的球体、点阵或随机游走换标题当成新片。
 
