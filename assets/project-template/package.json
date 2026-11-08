@@ -15,7 +15,11 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "plan:shots": "node scripts/creative.mjs plan",
-    "check:creative": "node scripts/creative.mjs check"
+    "check:creative": "node scripts/creative.mjs check",
+    "plan:music": "node scripts/music.mjs plan",
+    "check:music": "node scripts/music.mjs check",
+    "test:audio": "python -m unittest discover -s tests -p \"audio_*.py\"",
+    "analyze:track": "node scripts/analyze-track.mjs"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.539",

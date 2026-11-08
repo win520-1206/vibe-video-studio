@@ -2,6 +2,7 @@
 import argparse,json,math,wave
 from pathlib import Path
 import numpy as np
+from rhythm_features import extract
 
 def analyze(path,fps):
     if not math.isfinite(fps) or fps<=0:raise ValueError('fps must be finite and positive')
@@ -34,7 +35,7 @@ def analyze(path,fps):
     candidates=[i for i in range(1,count-1) if flux[i]>.1 and flux[i]>flux[i-1] and flux[i]>=flux[i+1]];chosen=[];gap=max(1,round(fps*.3))
     for i in sorted(candidates,key=lambda i:float(flux[i]),reverse=True):
         if all(abs(i-j)>=gap for j in chosen):chosen.append(i)
-    return {'schemaVersion':1,'source':str(Path(path).resolve()),'fps':fps,'sampleRate':sr,'channels':channels,'duration':duration,'frames':count,'bands':bands,'rms':[round(v,7) for v in rms],'onsets':[{'frame':i,'time':round(i/fps,6),'strength':round(float(flux[i]),6)} for i in sorted(chosen)],'limitations':'Energy/onset candidates only; no speech recognition, source separation or verified musical beat labels.'}
+    return {'schemaVersion':2,'rhythm':extract(mono,sr),'source':str(Path(path).resolve()),'fps':fps,'sampleRate':sr,'channels':channels,'duration':duration,'frames':count,'bands':bands,'rms':[round(v,7) for v in rms],'onsets':[{'frame':i,'time':round(i/fps,6),'strength':round(float(flux[i]),6)} for i in sorted(chosen)],'limitations':'Energy/onset candidates only; no speech recognition, source separation or verified musical beat labels.'}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--input',required=True,type=Path);p.add_argument('--fps',type=float,default=30);p.add_argument('--output',required=True,type=Path);a=p.parse_args()

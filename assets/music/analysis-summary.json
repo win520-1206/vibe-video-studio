@@ -4,26 +4,26 @@
   "decodedAnalysisDurationSeconds": 169.50566893424036,
   "analysisFps": 30,
   "tempo": {
-    "estimatedBpm": 112.5,
+    "estimatedBpm": 113.4648,
     "candidates": [
       {
-        "bpm": 112.5,
-        "periodFrames": 16,
-        "periodicityScore": 0.57671
+        "bpm": 113.4648,
+        "periodSeconds": 0.528798185941043,
+        "periodicityScore": 0.83262
       },
       {
-        "bpm": 75.0,
-        "periodFrames": 24,
-        "periodicityScore": 0.5474
+        "bpm": 75.1705,
+        "periodSeconds": 0.7981859410430838,
+        "periodicityScore": 0.82725
       },
       {
-        "bpm": 120.0,
-        "periodFrames": 15,
-        "periodicityScore": 0.22337
+        "bpm": 90.4306,
+        "periodSeconds": 0.6634920634920635,
+        "periodicityScore": 0.72818
       }
     ],
     "confidence": "candidate_only",
-    "caveat": "Half/double tempo ambiguity and tempo changes require review."
+    "caveat": "Tempo and meter are uncertain; half/double time and local changes require review."
   },
   "climaxCandidates": [
     {
@@ -43,5 +43,69 @@
     }
   ],
   "listeningStatus": "not_reviewed",
-  "usage": "Recompute for project crop and fps; algorithm candidates are not verified drum hits or fixed edit points"
+  "usage": "Full-track selection guide only. Recompute for project crop/fps and review the musical phrasing; no confirmed drums or downbeats.",
+  "analysisRevision": "high-resolution-attacks-and-energy-lift",
+  "analysisRate": 200.45454545454547,
+  "impactCandidates": [
+    {
+      "id": "impact-attack-0003412",
+      "attackId": "attack-0003412",
+      "atSeconds": 17.021315,
+      "score": 1.85661,
+      "energyLift": 0.64608,
+      "beforeEnergy": 0.1493,
+      "afterEnergy": 0.79538,
+      "status": "candidate"
+    },
+    {
+      "id": "impact-attack-0017017",
+      "attackId": "attack-0017017",
+      "atSeconds": 84.892063,
+      "score": 1.76919,
+      "energyLift": 0.62347,
+      "beforeEnergy": 0.17073,
+      "afterEnergy": 0.7942,
+      "status": "candidate"
+    },
+    {
+      "id": "impact-attack-0013616",
+      "attackId": "attack-0013616",
+      "atSeconds": 67.925624,
+      "score": 1.58259,
+      "energyLift": 0.40352,
+      "beforeEnergy": 0.24527,
+      "afterEnergy": 0.64879,
+      "status": "candidate"
+    },
+    {
+      "id": "impact-attack-0016167",
+      "attackId": "attack-0016167",
+      "atSeconds": 80.651701,
+      "score": 1.15583,
+      "energyLift": 0.32607,
+      "beforeEnergy": 0.33364,
+      "afterEnergy": 0.65971,
+      "status": "candidate"
+    },
+    {
+      "id": "impact-attack-0015795",
+      "attackId": "attack-0015795",
+      "atSeconds": 78.795918,
+      "score": 1.08429,
+      "energyLift": 0.35763,
+      "beforeEnergy": 0.28829,
+      "afterEnergy": 0.64592,
+      "status": "candidate"
+    },
+    {
+      "id": "impact-attack-0018398",
+      "attackId": "attack-0018398",
+      "atSeconds": 91.781406,
+      "score": 1.07649,
+      "energyLift": 0.37473,
+      "beforeEnergy": 0.46763,
+      "afterEnergy": 0.84236,
+      "status": "candidate"
+    }
+  ]
 }

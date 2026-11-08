@@ -1,135 +1,133 @@
 # vibe-video-studio
 
-**让知识成为可观看的过程，让音乐参与理解。**
+让知识成为可观看的过程，让音乐参与理解。
 
-融合知识、动画与情绪表达的AI编码助手Skill，覆盖选题、科学依据、剧情与分镜、主题动画、音乐适配、Remotion渲染和交付。适合科学可视化、科普短剧、知识与生活思考短片，以及需要改善PPT感或重复动画的作品。
+面向AI编码助手的视频制作Skill，覆盖选题、文案、科学依据、动作分镜、主题动画、音乐适配、Remotion合成与交付。适合科学可视化、科普短剧，以及融合知识与生活思考的短片。
 
 ## 创作方式
 
-每个主题重新设计对象、过程、尺度和镜头，不提供可套用全片的球体、点阵或随机游走场景。保留统一的时间轴、音乐分析、动态文字和渲染检查工具，将制作效率与视觉原创分开处理。
+每个主题重新选择对象、尺度、动作与镜头，不用同一套粒子球或点阵换标题。动画呈现条件、变化和结果，文字分时解释，音乐参与蓄势与揭示；情绪来自过程，科学事实、教学模型、类比和作者观点各有边界。
 
-以“好奇—理解—顿悟—共鸣”检查观众的观看体验，按题材组织故事。生活问题可以引出知识，实验、工程与宇宙题材也可从异常、任务或悖论切入。动画展示条件与变化；科学事实、教学模型和生活类比分别说明。不强制哲理结尾，不固定知识与情绪比例。
+默认美术偏好是深色空间、有限强调色与电影感，可按项目调整。普通新工程只有制作管线，场景注册表为空，需要按题材编写模型与视图。集数、各集片长、横竖屏、帧率和高潮位置均按本次任务确定。
 
-默认美术偏好为深色空间、有限强调色与电影感；具体主体、动作、字体布局、材质和转场按本题材设计。Canvas、SVG、WebGL及Blender逐镜选择，不为追求统一技术而牺牲表达。
+## 安装与调用
 
-## 从认识到共鸣
-
-知识与哲理融合在同一创作流程：用真实机制回答问题，让动画中的等待、变化、对照和修正带动情绪，结尾回应开场。科学事实、教学模型、生活类比和作者观点各有边界。默认不划分科普/哲理模式，不规定内容比例。
-
-场景与文案确定后运行`npm run plan:shots`，填写creative-plan.json，再用`npm run check:creative`核对场景覆盖、原稿、事件及创作项。不会覆盖已有草稿，不要求先实现renderer，不影响旧工程原命令。结构通过后，表达质量仍需观看与审听。
-
-完整示例与接口见[知识、动画与情绪](references/creative-narrative.md)。可在Skill根目录创建两个独立验证工程：
+Skill名称为`vibe-video-studio`，仓库地址为`win520-1206/vibe-video-studio`。
 
 ```bash
-node scripts/create-study.mjs interference ../wave-study --music /path/to/your-music.mp3
-node scripts/create-study.mjs feedback ../feedback-study --music /path/to/your-music.mp3
-```
-
-示范使用波的干涉和反馈纠偏，以不同对象和动作展示从疑问到理解、再到思考的推导。18秒、30fps仅服务本轮验证；它们不会进入普通新工程。公开包只提供源码与资料，不附私人音轨或验证成片。更换示范音乐后仍需重新选段和调整事件，不能保留不适合新曲的固定落点。
-
-## 安装
-
-Skill 名称为 `vibe-video-studio`，GitHub 仓库地址为 `win520-1206/vibe-cinematic-video`；Skill 与仓库分别命名。
-
-安装Node.js后，可通过skills CLI安装：
-
-```bash
-npx skills add win520-1206/vibe-cinematic-video --skill vibe-video-studio
+npx skills add win520-1206/vibe-video-studio --skill vibe-video-studio
 ```
 
 用户级Codex安装：
 
 ```bash
-npx skills add win520-1206/vibe-cinematic-video --skill vibe-video-studio --agent codex --global
+npx skills add win520-1206/vibe-video-studio --skill vibe-video-studio --agent codex --global
 ```
 
-此命令通过npm运行skills安装器，从GitHub读取Skill；本仓库不需要另行发布同名npm包。也可手动将包含SKILL.md的整个文件夹放入助手的skills目录。发现网站的展示由其索引规则决定，安装命令并不等于已经被所有网站收录。
-
-## 调用
-
-在支持Skill的助手中调用 `$vibe-video-studio`，说明主题、受众用途、集数、各集时长、横竖屏、素材、音乐及先样片还是整片。缺少关键参数时助手会集中询问，已有选择继续沿用。题材、集数、片长和高潮时刻没有固定默认值。
+命令通过npm运行skills安装器，从GitHub读取Skill，无需另发同名npm包。也可将整个Skill文件夹复制到助手的skills目录。其他网站是否展示取决于其索引规则。
 
 ```text
-使用 $vibe-video-studio 做一部讲反馈与稳定性的知识短片。
-先分析我给的音乐和参考，按机制设计对象变化。
-避免沿用上一部的粒子球，先交可播放样片。
+使用 $vibe-video-studio 做一部关于反馈与稳定性的知识短片。
+面向大学生，结合生活中的反复修正，先交可播放样片。
+分析我提供的音乐，按机制设计对象变化，不沿用上一部的动画。
 ```
 
-## 制作流程
+助手会集中确认尚缺的主题、受众、思考、集数和片长、画幅帧率、素材音乐及交付位置，沿用已经确认的选择。
 
-1. 读取素材和参考，核验科学主张、适用条件和模型。
-2. 写观众疑问与原稿，设计对象的初态、条件、变化和结果。
-3. 填写视觉设计单，说明本题材的对象、尺度、镜头语言与旧作的区别。
-4. 分析音乐、选择本次选段，把关键理解与揭示映射到声音事件。
-5. 编写项目专属模型、状态与视图，实现文字分时呈现和镜头接续。
-6. 用实际片段检查表达，再完成约定渲染、审看、审听及交付。
+## 从想法到影片
 
-参考方法见[主题设计](references/theme-led-design.md)。保留完整确认稿及SRT；画面按动作呈现短语、大字、对象标签与公式，不默认“顶部标题＋底部整句＋常驻说明”。字效后保留稳定阅读，不用复杂运动掩盖信息不足。
+1. 读取参考与资料，明确疑问、科学机制及适用条件。
+2. 精简文案，推导主体的初态、条件、动作和结果，设计认识与情绪变化。
+3. 分析音乐，结合本次时长选段，把关键理解与声音事件关联。
+4. 编写主题模型与镜头，让主体持续演变；动态短句、对象标签与公式各司其职，保留稳定阅读。
+5. 用真实片段检查动作与音乐，再完成渲染、科学复核、审看审听和约定交付。
 
-## 工程底座
+完整确认稿与SRT保留全部含义、数字和条件；画面不默认长期堆叠标题、底部整句及说明。创作表引用原场景、文案和事件ID，不维护第二套时钟。
 
-需要Node.js、Python与NumPy、Chrome/Edge/Chromium，以及可用的FFmpeg/ffprobe。依赖锁在工程模板内；工具路径支持显式配置。Blender按镜头需要启用，不自动安装。
+## 可复现的音乐适配
 
-从Skill根目录创建独立工程：
+整曲分析可以先于分镜与工程完成：
+
+```bash
+python scripts/analyze_track.py --input "音乐文件" --output "新的分析目录" --ffmpeg "ffmpeg路径"
+```
+
+产物含特征、起音和节拍候选、段落变化、声画动作组、报告、试听页及源文件/代码哈希与工具版本。输出目录非空时停止，保留已有笔记。项目内也可用`npm run analyze:track -- --input ... --output ...`。
+
+助手读取证据并结合主题选段，再用`analyze:music`重新分析实际选段，`plan:music`提出草稿，填写事件动作和反差后用`check:music`核验。起音检测独立于视频帧率；持续高能量不自动等于艺术高潮，不固定任何秒数。未实际听取时始终记录为候选。
+
+主揭示设计蓄势、落点、衰减与落定。`ctx.accent(eventId)`把同一事件的包络提供给主体、文字或镜头，具体运动由题材决定，不默认每拍切镜或全屏闪光。换曲、选段或帧率后重新分析和核对。操作与数据边界见[音乐分析流程](references/music-analysis-workflow.md)。
+
+## 工程使用
+
+需要Node.js、Python与NumPy、可用的FFmpeg/ffprobe和Chrome/Edge/Chromium。工程依赖由package-lock.json锁定；工具路径可显式配置。Blender只在选定复杂三维镜头时使用，不作为基础依赖或自动安装。
+
+在Skill根目录创建独立工程：
 
 ```bash
 node scripts/create-project.mjs ../my-film
-```
-
-目标非空时停止。正常创建的 `shared/scene-registry.mjs` 与 `src/scenes.tsx` 均为空，需要按主题编写同名renderer。状态暴露稳定对象ID、位置、保护区域和解释性指标；视图选择React/SVG/Canvas/WebGL。未实现时明确报错，没有通用动画回退。
-
-仅验证制作管线时可创建隔离的接口诊断：
-
-```bash
-node scripts/create-project.mjs ../pipeline-test --demo
-cd ../pipeline-test
+cd ../my-film
 npm ci
 python -m pip install -r requirements.txt
-npm run analyze:music
-npm run doctor
-npm run stills
 ```
 
-诊断用波形与分支两种不同视图，不是科学解释或视觉质量样板，普通工程不携带它们。诊断的参数不用于新片默认值。
+目标非空时停止。填写project-contract.json、script-manifest.json和docs；在shared/scene-registry.mjs及src/scenes.tsx注册同名主题renderer。科学模型与绘图分离，以帧、固定种子及共享状态重建任意时刻。React排字，SVG/Canvas画图解，WebGL处理空间与大量对象；Blender输出选定镜头，Remotion统一合成。
 
-| 命令 | 用途 |
+| 阶段 | 命令 | 作用 |
+| --- | --- | --- |
+| 音乐勘察 | `analyze:track` | 未完成分镜时也可分析音轨 |
+| 创作表 | `plan:shots` / `check:creative` | 草稿、覆盖与引用检查 |
+| 项目音频 | `analyze:music` | 实际选段、特征与混音 |
+| 声画设计 | `plan:music` / `check:music` | 事件候选、指纹与落点核验 |
+| 环境和预览 | `doctor` / `dev` | 工具检查、实际检查帧及预览 |
+| 输出 | `stills` / `render` | 关键帧、全片或绝对帧范围渲染 |
+| 验收交付 | `check` / `package` | 技术检查、视频、SRT与工程打包 |
+| 可选三维 | `blender:render` | 指定镜头的离线三维渲染 |
+| 开发验证 | `typecheck` / `test` / `test:audio` | 类型、状态与音频管线回归 |
+
+分析入口共用music_pipeline.py。缓存只复用相同PCM、参数、实现与环境的结果；整曲报告和项目混音保持各自的时间映射。详见[资源与缓存](references/music-adaptation.md)。
+
+## 诊断与机制示范
+
+只验证制作接口时，可用`node scripts/create-project.mjs ../pipeline-test --demo`创建独立诊断。波形/分支视图和合成测试音乐不进入普通项目，不是成片质量模板。
+
+```bash
+node scripts/create-study.mjs interference ../wave-study --music /path/to/music.mp3
+node scripts/create-study.mjs feedback ../feedback-study --music /path/to/music.mp3
+```
+
+两个原创示范分别使用波的干涉与反馈纠偏，展示不同主题的对象、动作与表达；示范参数仅用于验证，更换音乐仍需重新选段和设计事件。[融合叙事](references/creative-narrative.md)记录从文案推导动作的过程。旧作品保留原工程，旧walk/distribution配置迁入新底座时需要主题renderer，不自动改写。
+
+## 文档导航
+
+| 需要解决的问题 | 阅读 |
 | --- | --- |
-| `plan:shots` | 生成不覆盖的创作表草稿与阅读版 |
-| `check:creative` | 核查创作覆盖和引用，输出人工复核项 |
-| `doctor` | 工具、依赖、素材及实际检查帧 |
-| `dev` | Remotion预览 |
-| `analyze:music` | 预计算音频特征、候选节奏与混音 |
-| `stills` | 关键帧和布局取证 |
-| `render` | 全片或按绝对帧局部渲染 |
-| `check` | 配置、文案、布局、主体变化与实际媒体检查 |
-| `package` | 已验收视频、SRT、工程与资料打包 |
+| 需求、调用与修改范围 | [工作流](references/workflow.md)、[项目约定](references/project-contract.md) |
+| 主题原创、文案与情绪 | [主题设计](references/theme-led-design.md)、[融合叙事](references/creative-narrative.md) |
+| 分镜、文字与科学边界 | [科学镜头](references/scientific-shot-design.md)、[动态文案](references/dynamic-text-and-motion.md)、[科学核验](references/scientific-integrity.md) |
+| 分析音乐和复核候选 | [分析流程](references/music-analysis-workflow.md) |
+| 主揭示、事件与包络 | [节奏导演](references/music-direction.md) |
+| 选曲、长度与缓存 | [音乐资源](references/music-adaptation.md) |
+| 运动、相机、声音与混音 | [动作与声音](references/motion-and-audio.md) |
+| 接口、环境与三维 | [脚手架](references/scaffold.md)、[架构](references/architecture.md)、[工程](references/engineering.md)、[Blender](references/blender.md) |
+| 验收、交付与排错 | [验收](references/verification.md)、[制作经验](references/production-lessons.md) |
 
-接口与迁移见[脚手架](references/scaffold.md)，职责见[架构](references/architecture.md)。此版清除旧视觉组件，旧walk/distribution配置继续使用既有工程；迁移需重新编写主题renderer，不能直接把旧配置交给新模板。原作品不会自动更改。
-
-## 音乐与可选Blender
-
-本机默认使用用户指定的下载版，位置由assets/defaults.json登记。用户提供新曲时优先使用新曲；换曲、选段或帧率变化后重算特征。算法给出节拍、段落和高能区候选，关键卡点仍须结合实际听取与剧情确定。不会把某个秒数当成所有作品的高潮。
-
-公开仓库与公开ZIP不附私人音乐和参考视频。可提供自己有权使用的音轨，或放到登记位置；缺失时助手会询问，不会擅自换歌。下载版不自动等于纯伴奏，未做音源分离时如实记录。
-
-Blender适合复杂实体、装配、剖切、材质与照明；输出无声片段或透明序列，Remotion负责编排与文字。记录帧号映射、事件、源文件与参数。详见[音乐适配](references/music-adaptation.md)和[Blender](references/blender.md)。
-
-## 验收与交付
-
-自动检查配置、原稿覆盖、稳定阅读、越界遮挡、事件、主体状态、确定性及输出媒体。背景或相机运动不能证明主体在解释知识。实际观看判断叙事、主题差异与视觉效果，实际审听判断声画配合，科学依据需另行核验。
-
-具体已运行项目和未验证范围见[验证记录](assets/validation-report.json)。技术通过不代表成片审美或科学结论自动通过。交付按用户约定包含视频、SRT、工程、素材来源与验收记录。
-
-## 文件结构
+## 文件职责与交付边界
 
 ```text
-SKILL.md                  助手入口
-references/               主题设计、科学表达、音乐、工程与验收
-scripts/                  创建项目和音频/媒体分析
-assets/defaults.json      默认资源与偏好
+SKILL.md                  助手入口与按需文档路由
+agents/                   助手界面元数据
+references/               分工明确的创作、音乐、工程与验收说明
+scripts/                  创建工程、分析音频及检查媒体
+assets/defaults.json      本机默认资源和偏好
 assets/styles/            美术方向
-assets/project-template/  无预设视觉场景的运行底座
-assets/diagnostics/       隔离接口测试
+assets/project-template/  无预设镜头的可运行管线
+assets/diagnostics/       隔离接口诊断
+assets/studies/           独立原创机制示范
 ```
 
-创作参考与许可边界见[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。仓库尚未单独声明整体代码许可证；第三方依赖与素材遵循各自许可。
+技术检查覆盖配置、完整稿、阅读窗口、越界遮挡、模型状态、事件、确定性和媒体。科学准确、连续观看、实际审听与主观冲击分别记录，自动通过不能替代人工判断。具体已运行范围见[验证记录](assets/validation-report.json)。
+
+私人音乐只保存在本地。公开包排除音乐原文件、参考视频、成片、依赖缓存、凭证和本机绝对路径。交付根据约定包含视频、SRT、工程、素材来源及验收记录。
+
+参考与第三方依赖见[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。仓库尚未单独声明整体代码许可证；第三方组件遵循各自许可证。

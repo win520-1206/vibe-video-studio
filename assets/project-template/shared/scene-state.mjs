@@ -1,7 +1,7 @@
 import {sceneSpecs} from './scene-registry.mjs';
 export function sceneState(ctx,time=ctx.time){
  const frame=Math.round(time*ctx.fps),original=ctx;
- ctx={...ctx,time,frame,localTime:time-ctx.scene.start,signal:name=>original.signal(name,frame)};
+ ctx={...ctx,time,frame,localTime:time-ctx.scene.start,accent:id=>original.accent(id,time),signal:name=>original.signal(name,frame)};
  if(ctx.scene.kind==='blender')return {objects:[],protectedRegions:[],phase:'media',expected:'media',metrics:{}};
  const spec=sceneSpecs[ctx.scene.renderer];
  if(!spec)throw Error(`Unregistered subject renderer: ${ctx.scene.renderer}; author its state and view`);

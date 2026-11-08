@@ -2,8 +2,7 @@
 from pathlib import Path
 import argparse,json,hashlib,subprocess,wave,math
 import numpy as np
-from audio_features import analyze
-from music_structure import analyze as structure
+from music_pipeline import analyze_pcm,implementation_hashes
 
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def asset(root,relative):
@@ -22,7 +21,7 @@ def prepare(root,raw,ffmpeg):
   source=asset(root,audio['file']) if audio.get('required',True) else None
   source_hash=digest(source) if source else None
   event_hashes={x['id']:digest(asset(root,x['sound']['file'])) for x in events if x.get('sound',{}).get('file')}
-  spec={'sourceHash':source_hash,'eventHashes':event_hashes,'audio':audio,'fps':fps,'duration':duration,'events':events,'implementation':[digest(Path(__file__)),digest(Path(__file__).with_name('audio_features.py')),digest(Path(__file__).with_name('music_structure.py'))]}
+  spec={'sourceHash':source_hash,'eventHashes':event_hashes,'audio':audio,'fps':fps,'duration':duration,'events':events,'implementation':{'prepare_audio.py':digest(Path(__file__)),**implementation_hashes()}}
   key=hashlib.sha256(json.dumps(spec,sort_keys=True).encode()).hexdigest();prefix=dest/e['id'];cache=dest/(e['id']+'-audio-cache.json')
   outputs=[dest/(e['id']+s) for s in ['-music.wav','-mix.wav','-features.json','-music-analysis.json']]
   if cache.exists():
@@ -52,12 +51,10 @@ def prepare(root,raw,ffmpeg):
   peak=float(abs(mix).max())
   if peak>=1:raise ValueError(f'{e["id"]}: mix clips ({peak}); adjust gains explicitly')
   wav(outputs[0],music);wav(outputs[1],mix)
-  features=analyze(outputs[0],fps);features['source']='music selection';features['duration']=duration
-  features['frames']=round(duration*fps)
-  for k in features['bands']:features['bands'][k]=features['bands'][k][:features['frames']]
-  features['rms']=features['rms'][:features['frames']]
-  outputs[2].write_text(json.dumps(features),encoding='utf8');analysis=structure(features)
-  analysis['mapping']={'sourceStartSeconds':audio.get('cropStartSeconds') or 0,'timelineStartSeconds':0,'playbackRate':1}
+  features,analysis=analyze_pcm(outputs[0],fps,source='music selection',duration=duration,cache_dir=dest/'.analysis-cache')
+  outputs[2].write_text(json.dumps(features),encoding='utf8')
+  analysis['selectionFingerprint']=hashlib.sha256((digest(outputs[0])+str(fps)).encode()).hexdigest()
+  analysis['mapping']={'sourceSha256':source_hash,'sourceStartSeconds':audio.get('cropStartSeconds') or 0,'timelineStartSeconds':0,'playbackRate':1}
   outputs[3].write_text(json.dumps(analysis,indent=2),encoding='utf8')
   cache.write_text(json.dumps({'key':key,'spec':spec,'peak':peak,'listeningStatus':'not_reviewed','hashes':{p.name:digest(p) for p in outputs}},indent=2),encoding='utf8');print(e['id']+': prepared exact-length audio')
 if __name__=='__main__':

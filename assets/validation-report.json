@@ -1,108 +1,133 @@
 {
-  "date": "2026-11-02",
-  "revision": "knowledge-animation-emotion",
-  "baseBehaviorTests": 25,
-  "independentStudyModelTests": 4,
-  "typecheck": "both studies passed",
-  "studies": {
-    "interference": {
-      "frames": 540,
-      "fps": 30,
-      "durationSeconds": 18,
-      "size": [
-        1280,
-        720
-      ],
-      "layoutRows": 117,
-      "portraitSize": [
-        720,
-        1280
-      ],
-      "portraitCheckFrames": [
-        30,
-        150,
-        240,
-        360,
-        480
-      ],
-      "modelTests": 2,
-      "creativeCheck": "passed",
-      "fullDecode": "passed",
-      "videoSha256": "6d033dc98062c2fba5e705a4ae93c6fbbccd7dcd58402265f35ce99f80c527d4"
-    },
-    "feedback": {
-      "frames": 540,
-      "fps": 30,
-      "durationSeconds": 18,
-      "size": [
-        1280,
-        720
-      ],
-      "layoutRows": 116,
-      "portraitSize": [
-        720,
-        1280
-      ],
-      "portraitCheckFrames": [
-        30,
-        150,
-        240,
-        360,
-        480
-      ],
-      "modelTests": 2,
-      "creativeCheck": "passed",
-      "fullDecode": "passed",
-      "videoSha256": "cb4ee0c9c14e5009a95b96c96a5d3242e15949804c76a4aeff9f45eeed57ca03"
-    }
-  },
-  "seeking": [
+  "date": "2026-11-08",
+  "revision": "package-organization",
+  "nodeBehaviorTests": 33,
+  "pythonAudioTests": 11,
+  "typecheck": "passed",
+  "analysisRegression": [
     {
-      "name": "interference",
-      "frames": [
-        240,
-        0,
-        240
-      ],
-      "sameFramePngIdentical": true,
-      "browserErrors": []
+      "fixture": "default-delivery",
+      "mode": "high-resolution",
+      "identical": true
     },
     {
-      "name": "feedback",
-      "frames": [
-        240,
-        0,
-        240
-      ],
-      "sameFramePngIdentical": true,
-      "browserErrors": []
+      "fixture": "default-delivery",
+      "mode": "legacy",
+      "identical": true
+    },
+    {
+      "fixture": "repeat-a",
+      "mode": "high-resolution",
+      "identical": true
+    },
+    {
+      "fixture": "repeat-a",
+      "mode": "legacy",
+      "identical": true
     }
   ],
-  "partialAudio": {
-    "rangeFrames": [
-      210,
-      269
+  "integration": {
+    "changedEventsReuseAnalysis": true,
+    "musicFeaturesUnchanged": true,
+    "eventBindingErrorFrames": 0,
+    "listeningStatus": "not_reviewed",
+    "standaloneAndPreStoryIdentical": [
+      "features.json",
+      "track-analysis.json",
+      "beat-map.json",
+      "section-map.json",
+      "report.md",
+      "review.html",
+      "provenance.json"
     ],
-    "expectedTimelineStartSeconds": 7,
-    "bestOffsetSamples": 0,
-    "bestOffsetSeconds": 0.0,
-    "fittedGain": 0.7064998863626801,
-    "gainAdjustedRmsError": 0.0009175136634478784,
-    "relativeError": 0.0072341527505706315,
-    "passed": true,
-    "tolerance": "<=1 ms alignment, <5% fitted residual for lossy AAC; gain is measured, not claimed unchanged",
-    "listeningStatus": "not_reviewed"
+    "nonemptyProjectGuard": true,
+    "missingDirectionGuardObserved": true,
+    "newFilmRender": false
   },
-  "partialDecodedFrames": 60,
-  "normalProject": "empty registries; no study model or creative plan auto-loaded",
   "manualReview": {
-    "representativeFrames": "reviewed",
-    "continuousViewing": "not_reviewed",
+    "continuousViewing": "not_rerun_for_structural_refactor",
     "listening": "not_reviewed",
-    "overallAesthetics": "not_approved_automatically",
-    "scientificScope": "analytic teaching models tested; life analogies not scientific conclusions"
+    "subjectiveQuality": "not_approved_automatically"
   },
-  "blender": "not selected or rendered",
-  "music": "private default MP3 unchanged; excerpt features recomputed; transient candidates are not verified drum hits",
-  "githubPushed": false
+  "newFilmRender": false,
+  "blender": "not run; interface unchanged",
+  "oldProductions": "unchanged",
+  "githubPushed": false,
+  "previousStageEvidence": {
+    "notice": "Historical checks below were not rerun in this package refactor.",
+    "report": {
+      "date": "2026-11-08",
+      "revision": "reproducible-music-workflow",
+      "nodeBehaviorTests": 33,
+      "pythonAudioTests": 7,
+      "typecheck": "passed",
+      "highResolutionAnalysis": "approximately 5ms; same attacks at 24/60fps synthetic test",
+      "mainBinding": {
+        "rawAttackSeconds": 5.99,
+        "eventSeconds": 6,
+        "eventFrame": 180,
+        "quantizedErrorFrames": 0,
+        "reviewStatus": "candidate"
+      },
+      "fullDecodedFrames": 360,
+      "sameFramePngIdentical": true,
+      "subjectExtentPeakFrame": 180,
+      "partialAudio": {
+        "range": [
+          150,
+          209
+        ],
+        "expectedTimelineStartSeconds": 5,
+        "bestOffsetSamples": 0,
+        "fittedGain": 0.7064998863626801,
+        "relativeFittedError": 0.0072341527505706315,
+        "passed": true,
+        "listeningStatus": "not_reviewed"
+      },
+      "technicalWarnings": [
+        "main: candidate alignment, listening not confirmed"
+      ],
+      "manualReview": {
+        "selectedFrames": "reviewed",
+        "continuousViewing": "not_reviewed",
+        "listening": "not_reviewed",
+        "subjectiveImpact": "not_approved_automatically"
+      },
+      "blender": "not used",
+      "oldProductions": "unchanged",
+      "githubPushed": false,
+      "workflowValidation": {
+        "inputs": [
+          "registered default MP3",
+          "different original synthesized WAV"
+        ],
+        "standaloneBeforeStory": true,
+        "selectedRangeToProjectDraft": true,
+        "repeatArtifacts": {
+          "identicalArtifacts": [
+            "track-analysis.json",
+            "features.json",
+            "beat-map.json",
+            "section-map.json",
+            "report.md",
+            "review.html",
+            "provenance.json"
+          ],
+          "sameInputRepeated": true,
+          "defaultTimeAssumption": false
+        },
+        "reviewPage": {
+          "buttons": 16,
+          "sectionRows": 17,
+          "audioDuration": 169.505669,
+          "sourceHashPresent": true,
+          "manualMarkerMapping": "passed",
+          "emptyReviewGuard": "passed",
+          "testActions": "synthetic UI interactions; no actual listening review"
+        },
+        "newFullFilmRender": false,
+        "listening": "not_reviewed"
+      }
+    }
+  }
 }

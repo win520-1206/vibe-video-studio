@@ -5,53 +5,43 @@ description: 按主题原创设计融合知识、模型动画与情绪表达的�
 
 # vibe-video-studio
 
-让观众看见问题、理解机制，并在过程中产生情绪与思考。默认融合知识、动画和情绪，不分科普或哲理模式。复用制作工具，每个作品重新设计视觉对象与过程；禁止把上一作品的球体、点阵或随机游走换标题当成新片。
+让知识成为可观看的过程，让音乐参与理解。复用制作管线，每个作品重新设计对象、运动与镜头；融合知识、动画和情绪，不划分科普/哲理模式，不固定故事结构或内容比例。
 
-首次应用时告知用户。新作先集中询问尚缺的主题/科学问题、受众用途、希望传达的思考、集数与各集片长、画幅帧率、资料素材、样片或整片、输出位置。已确认的参数沿用，不重复问。用户授权自行决定时记录本次选择。示例的时长、集数、节拍均不是默认值。
+## 开始任务
 
-## 构思与参考
+首次应用时告知用户。集中询问尚缺的主题与科学问题、受众用途、希望传达的思考、集数与各集片长、画幅帧率、素材音乐、样片或整片以及输出位置。沿用已确认参数；用户授权自行决定时记录本次选择。没有默认集数、片长或高潮秒数。需求与迭代见[工作流](references/workflow.md)，字段见[调用约定](references/project-contract.md)。
 
-先读[主题设计](references/theme-led-design.md)。参考的重点是“文字说到什么，画面就让它发生”：对象、条件、变化、结果必须能被看见。生活疑问适合时采用；科学实验、工程任务可从异常或目标冲突开场。将期待、犹豫、失控或释然与过程相连；不强制人生金句，不用科学术语证明生活类比。科普短剧保留角色目标、阻碍与验证，不做成资料轮播。
+阅读参考时分别记录亲见画面、实际听取与算法推测，不把抽帧当连续审看。借鉴表达机制，不复制文案、角色和画面；科学主张核验可靠来源。
 
-拆解用户参考，分别记录亲见的画面、实际听取的声音和算法推测。不要把关键帧观察说成逐秒审看，也不要复制具体文案、角色与画面。文档中的120秒、70%/30%仅为示例。主题模型和科学主张仍须查可靠来源。
+## 创作与分镜
 
-在本次docs/visual-design.md中写主题对象、视觉隐喻、机制、尺度、动作语法、文字策略、音乐情绪与相较已有作品的区别。每镜写初态、条件、动作、结果、理解目标、依据、声音事件和接续方式。先设计主体，后设计相机、文字与光效。用装饰运动冒充解释性动作不合格。具体分镜见[scientific-shot-design.md](references/scientific-shot-design.md)。
+1. 用[主题设计](references/theme-led-design.md)选择对象、尺度、机制与动作语法，写入项目docs/visual-design.md。从生活疑问、异常、工程任务或冲突切入；科普短剧保留角色目标、阻碍与验证。
+2. 按[融合叙事](references/creative-narrative.md)连接问题、机制、认识变化与情绪。共鸣可以贯穿过程，结尾回应开场；科学机制不能证明人生结论。事实、教学模型、类比与作者观点分别说明边界。
+3. 依[科学镜头设计](references/scientific-shot-design.md)写每镜的初态、条件、动作、结果、理解目标、依据与接续。先让主体承担解释，再安排相机、材质与光效，不用装饰运动代替变化。
+4. 原稿确认前完成短句化与删冗；确认后保留数字、条件与完整含义。按[动态文字](references/dynamic-text-and-motion.md)分时呈现叙事短句、对象标签和公式，留稳定阅读阶段，完整SRT仍用确认稿。不默认三层文字或底部整句。
 
-## 音乐与文字
+场景、原稿和事件ID确定后运行`plan:shots`，填写creative-plan.json，再运行`check:creative`。创作表只引用已有配置，不建立重复时钟；不覆盖已有填写内容。科学边界见[科学核验](references/scientific-integrity.md)。
 
-默认风格cinematic-spatial保留深色、电影感与有限强调色，但不预设球体、粒子或固定镜头。用户可覆盖风格。默认音乐以assets/defaults.json登记的本机下载版为准；优先使用本次用户音乐，其次已选登记曲目，再用默认曲。公开分发不附私人曲目，缺失时询问位置或替换素材。
+## 音乐适配
 
-新曲分析频段、瞬态、节奏、段落与高潮候选，区分算法建议和实际审听；按本次故事、时长、选段与帧率重新确定卡点。关键理解对应音乐揭示，留出阅读和余韵；不每拍切镜、不固定17秒、不颠倒因果。参见[music-adaptation.md](references/music-adaptation.md)。未分离混音不能称纯BGM；下载版也不自动等于无声乐音轨。
+本次用户选曲优先，其次沿用已选曲，再使用assets/defaults.json登记的本机默认音乐。默认风格cinematic-spatial与选曲独立；公开包不附私人音轨，缺失时询问素材位置，不静默替换。
 
-原稿先短句化；确认后保留完整内容及限制条件。画面文案分时呈现，叙事大字、对象标签和公式各有分工，不常驻“标题+底部整句+说明”。排版随对象与构图选择，不自动左右交替。字效后留稳定阅读，完整SRT仍用确认稿。详见[dynamic-text-and-motion.md](references/dynamic-text-and-motion.md)。
+- 收到音乐时执行[可复现分析流程](references/music-analysis-workflow.md)：整曲分析→阅读报告与候选→必要试听→选段→项目分析→事件绑定→实际片段验证。助手将证据转成主题动作，不要求用户填写工程ID。大致高潮位置只是线索。
+- 按[节奏导演](references/music-direction.md)设计蓄势、落点、衰减与落定；主揭示有具体的主体、景别、速度或密度反差，次级起音只在有表达收益时驱动动作。`plan:music`生成草稿，填写episode.musicDirection后用`check:music`核对；`ctx.accent(eventId)`供主题renderer使用。
+- 默认素材、选段不足与缓存规则见[音乐资源适配](references/music-adaptation.md)，相机、音效与混音见[动作与声音](references/motion-and-audio.md)。科学因果与阅读优先，不为卡点伪造模型。
 
-## 创作表与表达
-
-读[知识、动画与情绪](references/creative-narrative.md)，在确认前完成文案短句化和删冗；确认后完整保留限制条件与数字。填写项目的开场疑问、核心机制、认识变化、情绪联系和结尾回应；科学主张与生活感悟分别记录依据和边界。共鸣贯穿过程，结尾回收开场，不附加脱离过程的金句。
-
-场景和文案ID确定后运行`npm run plan:shots`，填写creative-plan.json；它引用原配置的场景、原稿和声音事件，不建立第二套时间。`npm run check:creative`核查覆盖、引用和事件位置，刷新qa内阅读版；已有草稿不覆盖，既有工程不强制迁移。命令无需加载已实现的renderer。
-
-独立示范可用`node scripts/create-study.mjs interference <新目录>`或`feedback`创建，18秒/30fps只用于验证；正常新作不携带示范视图。先阅读示范的科学边界，再借鉴从文案到动作和情绪的推导方法，不直接复用为新片。
+算法输出保持候选，未实际听取不标confirmed，不称已识别鼓、强拍或艺术高潮。换曲、选段、速度或fps变化后重算/核验。数值对齐不能代替实际声画冲击判断。
 
 ## 工程实现
 
-读[scaffold.md](references/scaffold.md)创建独立工程：`node scripts/create-project.mjs <新目录>`。目标非空停止。模板只有制作管线，场景注册表为空；按本题材编写共享状态与renderer，同名注册模型和视图。无通用视觉回退。`--demo`为隔离的接口诊断，不是成片模板或默认参数。
+用[脚手架](references/scaffold.md)创建独立工程：`node scripts/create-project.mjs <新目录>`，目标非空停止。普通工程的模型与视图注册表为空，按主题注册同名renderer，没有通用球体、点阵或固定片头回退。既有作品不覆盖；旧walk/distribution工程继续使用自己的引擎，迁移需明确实现与核验。
 
-React精确排字，Canvas/SVG解释图形，WebGL处理空间或大量对象，复杂实体、材质、剖切和装配可逐镜评估[Blender](references/blender.md)，不强制启用或自动安装。模型独立，时间由frame/fps计算，固定随机种子，支持乱序与局部渲染。动作、文字强调、音效引用同一事件。更多见[架构](references/architecture.md)、[工程](references/engineering.md)。
+React负责精确文字，SVG/Canvas负责图解，WebGL负责空间与大量对象；复杂实体、装配、剖切与材质逐镜评估[Blender](references/blender.md)，不强制安装或静默替代。各层共享帧时间、模型状态、音乐与事件；模型独立、固定种子、支持乱序和局部渲染。架构见[architecture.md](references/architecture.md)，环境与渲染见[engineering.md](references/engineering.md)。
 
-旧作品工程不覆盖。此版移除旧视觉组件，旧walk/distribution配置继续用其原工程；主动迁移需编写主题renderer，不宣称旧配置可直接套新模板。
+`--demo`仅用于隔离接口诊断；`create-study.mjs interference|feedback <新目录>`用于独立原创机制示范。示范的参数和场景都不自动进入新作。
 
-## 推进与交付
+## 验收与交付
 
-需求和参考 → 科学依据 → 原稿与动作分镜 → 音乐选段/事件映射 → 主题镜头实现 → 代表片段 → 成片与验收。音乐分析可提前并行推进，不强制机械线性流程。已授权整片时不增加不必要的确认关卡。
+已授权整片时持续推进，不新增不必要的确认关卡。按[验收规范](references/verification.md)检查确认稿覆盖、稳定阅读、越界遮挡、主体变化、接缝、确定性、音乐位置和完整解码。科学核验、连续观看和实际审听分别记录；自动通过不等于表达质量通过。排错经验按需读[production-lessons.md](references/production-lessons.md)。
 
-验收包括模型、确认稿覆盖、稳定阅读、文字越界和遮挡、主体变化、镜头接缝、确定性、音乐位置与实际解码。看实际片段判断理解、审美和声画互动；自动检查不能代替科学核验、连续观看和审听。参见[verification.md](references/verification.md)、[scientific-integrity.md](references/scientific-integrity.md)。
-
-交付约定的视频、SRT、工程、依据和验收记录；明确未做的检查。原输入、私人音乐与公开分发分别管理，不把本机路径、参考视频、成片或缓存带入公开包。任务授权范围外不自行推送GitHub。
-
-## 按需资源
-
-- [workflow.md](references/workflow.md)：需求与迭代；[project-contract.md](references/project-contract.md)：调用约定。
-- [motion-and-audio.md](references/motion-and-audio.md)：运动与声音；[production-lessons.md](references/production-lessons.md)：制作经验。
-- scripts/audio_features.py：PCM WAV按帧特征；scripts/music_structure.py：节拍和高能段候选；scripts/inspect_media.py：媒体规格。
-- assets/defaults.json与assets/styles/：资源和美术偏好；assets/project-contract.example.json：待填项目配置。
+交付约定的视频、SRT、工程、来源与验证记录，说明未做的检查。公开包排除私人音乐、参考视频、成片、缓存、凭证和本机绝对路径。没有本次发布授权不自行推送GitHub。

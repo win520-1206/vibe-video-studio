@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const skill=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const argv=process.argv.slice(2);const target=argv[0];const option=n=>{const i=argv.indexOf('--'+n);return i<0?null:argv[i+1]};
-function copyTree(src,dest){fs.mkdirSync(dest,{recursive:true});for(const item of fs.readdirSync(src,{withFileTypes:true})){const from=path.join(src,item.name),to=path.join(dest,item.name);if(item.isSymbolicLink())throw Error('Template symlinks are not supported');if(item.isDirectory())copyTree(from,to);else fs.copyFileSync(from,to)}}
+function copyTree(src,dest){fs.mkdirSync(dest,{recursive:true});for(const item of fs.readdirSync(src,{withFileTypes:true})){if(item.name==='__pycache__'||item.name.endsWith('.pyc'))continue;const from=path.join(src,item.name),to=path.join(dest,item.name);if(item.isSymbolicLink())throw Error('Template symlinks are not supported');if(item.isDirectory())copyTree(from,to);else fs.copyFileSync(from,to)}}
 try{
  if(!target||target.startsWith('--'))throw Error('Usage: node create-project.mjs <new-directory> [--demo | --contract file.json] [--music file]');
  const dest=path.resolve(target);if(fs.existsSync(dest)&&(!fs.statSync(dest).isDirectory()||fs.readdirSync(dest).length))throw Error('Target must be absent or an empty directory');
@@ -17,7 +17,7 @@ try{
  const music=option('music');if(music&&!fs.statSync(path.resolve(music)).isFile())throw Error('Music file missing');
  fs.mkdirSync(dest,{recursive:true});copyTree(template,dest);fs.mkdirSync(path.join(dest,'tools'),{recursive:true});
  if(argv.includes('--demo'))for(const [from,to]of [['scene-registry.mjs','shared/scene-registry.mjs'],['scenes.tsx','src/scenes.tsx']])fs.copyFileSync(path.join(skill,'assets/diagnostics',from),path.join(dest,to));
- for(const name of ['audio_features.py','music_structure.py','inspect_media.py'])fs.copyFileSync(path.join(skill,'scripts',name),path.join(dest,'tools',name));
+ for(const name of ['audio_features.py','rhythm_features.py','music_structure.py','music_workflow.py','music_pipeline.py','analyze_track.py','music_review.html','inspect_media.py'])fs.copyFileSync(path.join(skill,'scripts',name),path.join(dest,'tools',name));
  fs.copyFileSync(path.join(skill,'requirements.txt'),path.join(dest,'requirements.txt'));
  fs.mkdirSync(path.join(dest,'public'),{recursive:true});fs.mkdirSync(path.join(dest,'docs'),{recursive:true});
  if(music){const file='music'+path.extname(music).toLowerCase();fs.copyFileSync(path.resolve(music),path.join(dest,'public',file));config.audio={...config.audio,file,required:true};for(const e of config.episodes||[])delete e.audio?.file}

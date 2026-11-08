@@ -25,6 +25,8 @@ state返回 `{objects, protectedRegions, phase, expected, metrics}`。objects的
 Blender仍是可选逐镜路线，kind为blender时沿用media帧率、帧数、源起始帧与事件映射，详见[Blender](blender.md)。没选Blender不检测或安装它。其他技术检查和手工审看范围见[验收](verification.md)。
 
 
-## 知识、动画与情绪
+## 创作表
 
-增加plan:shots和check:creative。前者从原始配置生成不覆盖的创作表，后者核查并刷新qa阅读版，无需先实现renderer。独立示范用scripts/create-study.mjs按ID创建，正常项目不自动复制；详见[融合叙事](creative-narrative.md)。
+plan:shots和check:creative用于创作表。前者从原始配置生成不覆盖的创作表，后者核查并刷新qa阅读版，无需先实现renderer。独立示范用scripts/create-study.mjs按ID创建，正常项目不自动复制；详见[融合叙事](creative-narrative.md)。
+
+音乐分析操作见[分析流程](music-analysis-workflow.md)，事件字段与包络见[节奏导演](music-direction.md)。

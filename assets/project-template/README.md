@@ -16,3 +16,9 @@ Blender is optional. Selected media must record source frame, fps, frames and sc
 ## Creative planning
 
 After setting episode/scene/caption/event IDs, run npm run plan:shots. Complete creative-plan.json: question, mechanism, insight, emotional connection and ending; per-shot action, viewer change, emotional beat and transition. No copied time fields. Existing JSON or docs reading copy is preserved. Run npm run check:creative to validate coverage, references, approved script and event windows; the updated reading copy is qa/creative-plan.md. These commands work before authoring renderers. Other commands remain compatible without the plan. Manual scientific, aesthetic and listening judgments are never automatically approved.
+
+## Music analysis and directing
+
+Run npm run analyze:track -- --input MUSIC --output NEW_DIRECTORY before the storyboard is complete, then inspect its report and optional listening page. After choosing the project crop, run analyze:music, plan:music and check:music. Write chosen bindings into episode.musicDirection; events remain the sole timeline. ctx.accent(eventId) supplies deterministic preparation, hit and reveal envelopes; the subject renderer determines the actual action. Candidates remain unconfirmed until actual listening.
+
+Both entrypoints share tools/music_pipeline.py. Exact PCM, fps, normalized duration, source label, code and Python/NumPy versions key the optional analysis cache under public/generated/.analysis-cache. Changed event/SFX work may reuse unchanged music features, but different crops, decodes or gains do not share results. Generated audio, caches and listening previews are private outputs, not source assets.

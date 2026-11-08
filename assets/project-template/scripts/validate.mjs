@@ -1,3 +1,4 @@
+import {inspectMusic} from '../shared/music.mjs';
 import fs from 'node:fs';
 import {assetErrors,json,publicPath,hash,tool,run} from './common.mjs';
 import {cuesFor,cueWindow,inspectTextPlan} from '../shared/presentation.mjs';
@@ -31,6 +32,7 @@ export function inspectProject(p,{generated=true}={}){
    for(const ev of e.events)if(ev.sound?.file&&cache.spec.eventHashes[ev.id]!==hash(publicPath(ev.sound.file)))errors.push(`${ev.id}: stale SFX cache`);
   }catch(err){errors.push(`${e.id}: generated audio missing/invalid: ${err.message}`)}}
  }
+ if(generated)for(const e of p.episodes)if(e.musicDirection){try{const r=inspectMusic({...p,episodes:[e]},{[e.id]:json(publicPath(`generated/${e.id}-music-analysis.json`))});errors.push(...r.errors);warnings.push(...r.warnings)}catch(err){errors.push(`${e.id}: music direction check failed: ${err.message}`)}}
  return {errors:[...new Set(errors)],warnings:[...new Set(warnings)]};
 }
 export function inspectBoxes(row,p){const errors=[];const boxes=row.boxes;

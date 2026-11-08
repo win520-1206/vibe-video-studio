@@ -11,7 +11,7 @@ export function Film({project,episode}:any){
  const state=sceneState(ctx),View=sceneViews[s.renderer];
  if(s.kind!=='blender'&&!View)throw Error(`Missing visual implementation: ${s.renderer}`);
  useLayoutEffect(()=>{if(!features)return;const rect=root.current!.getBoundingClientRect();const boxes=Array.from(root.current!.querySelectorAll<HTMLElement>('[data-label]')).map(el=>{const r=el.getBoundingClientRect();const scale=project.video.width/rect.width;return {id:el.dataset.label,role:el.dataset.role,phase:el.dataset.phase,overlapGroup:el.dataset.overlap,anchor:el.dataset.anchor,text:el.textContent,x:(r.x-rect.x)*scale,y:(r.y-rect.y)*scale,w:r.width*scale,h:r.height*scale,overflow:el.scrollWidth>el.clientWidth+1}});
-  console.log('VIBE_QA:'+JSON.stringify({episode:episode.id,frame,scene:s.id,boxes,model:{seed:ctx.seed,steps:s.model?.steps,samples:s.model?.samples},renderer:s.renderer??'blender',motion:state?motionProbe(state):null,protectedRegions:state?.protectedRegions}));
+  console.log('VIBE_QA:'+JSON.stringify({episode:episode.id,frame,scene:s.id,boxes,model:{seed:ctx.seed,steps:s.model?.steps,samples:s.model?.samples},renderer:s.renderer??'blender',musicCues:(episode.musicDirection?.bindings??[]).map((b:any)=>({eventId:b.eventId,...ctx.accent(b.eventId)})),motion:state?motionProbe(state):null,protectedRegions:state?.protectedRegions}));
  },[frame,features,project,episode,s,ctx.seed]);
  const m=s.media,mediaFrame=m?m.sourceStartFrame+frame-Math.round(s.start*ctx.fps):0;
  return <AbsoluteFill ref={root} style={{background:project.style.background,color:project.style.text,fontFamily:project.fontFile?'ProjectFont':project.style.fontFamily}}>

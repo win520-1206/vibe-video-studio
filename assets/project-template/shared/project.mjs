@@ -1,3 +1,4 @@
+import {accentAt,impactSettings} from './music.mjs';
 // Shared by Node tools and the browser. Times are absolute episode seconds.
 import {cuesFor,cueWindow,inspectTextPlan,textLayout} from './presentation.mjs';
 import {sceneState} from './scene-state.mjs';
@@ -29,6 +30,7 @@ export function normalize(raw) {
     for(const x of events){need(x.id&&!eventIds.has(x.id),`${e.id}: duplicate/missing event ID`);eventIds.add(x.id);
       need(Number.isFinite(x.atSeconds)&&x.atSeconds>=0&&x.atSeconds<duration,`${e.id}/${x.id}: event outside episode`);
       try{frameAt(x.atSeconds,v.fps)}catch(err){errors.push(err.message)}
+      if(x.impact){const p=impactSettings(x);need(Object.values(p).every(v=>Number.isFinite(v)&&v>0)&&p.prepareSeconds>p.attackSeconds&&p.settleSeconds>=p.decaySeconds,`${x.id}: invalid impact envelope`)}
       if(x.sound)need(Number.isFinite(x.sound.gainDb)&&x.sound.gainDb<=0&&x.sound.durationSeconds>0,`${x.id}: invalid sound`);
     }
     const scenes=(e.scenes||[]).map(s=>({...s}));need(scenes.length>0,`${e.id}: no scenes`);
@@ -80,7 +82,7 @@ export function atFrame(project,episode,frame,features){
   const event=(id)=>episode.events.find(e=>e.id===id);
   const signal=(name,at=frame)=>features?.bands?.[name]?.[at]??0;
   return {frame,fps:project.video.fps,width:project.video.width,height:project.video.height,time,localTime:time-scene.start,
-    scene,episode,seed:project.seed,style:project.style,signal,event};
+    scene,episode,seed:project.seed,style:project.style,signal,event,accent:(id,at=time)=>accentAt(event(id),at)};
 }
 export function criticalFrames(project,e){
   const out=new Set([0,e.durationInFrames-1]);
@@ -99,6 +101,6 @@ export function criticalFrames(project,e){
     }
     const motion=s.motion||{};for(const fraction of [.12,.3,.5,.7,.9])add(s.start+(s.end-s.start)*fraction);for(const t of [motion.developStart,motion.developEnd])if(Number.isFinite(t))add(t);
   }
-  for(const ev of e.events)add(ev.atSeconds);
+  for(const ev of e.events){add(ev.atSeconds);if(ev.impact){const p=impactSettings(ev);for(const t of [ev.atSeconds-p.prepareSeconds,ev.atSeconds-p.attackSeconds,ev.atSeconds+p.decaySeconds,ev.atSeconds+p.settleSeconds])add(t)}}
   return [...out].sort((a,b)=>a-b);
 }

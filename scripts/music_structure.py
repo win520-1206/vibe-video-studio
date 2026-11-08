@@ -3,7 +3,7 @@ import argparse,json,math
 from pathlib import Path
 import numpy as np
 
-def analyze(data):
+def _frame_analysis(data, *, legacy_tempo):
     fps=float(data['fps']);duration=float(data['duration']);bands=data['bands'];n=len(bands['bass'])
     if fps<=0 or n<2:raise ValueError('Not enough frame-level audio data')
     bass=np.asarray(bands['bass'],float);air=np.asarray(bands['air'],float);body=np.asarray(bands['body'],float);rms=np.asarray(data['rms'],float)
@@ -11,7 +11,7 @@ def analyze(data):
     flux=np.maximum(0,np.diff(bass,prepend=bass[0]))+.65*np.maximum(0,np.diff(air,prepend=air[0]))+.2*np.maximum(0,np.diff(body,prepend=body[0]))
     active=float(np.max(rms))>1e-7 and float(np.max(flux))>1e-7
     candidates=[]
-    if active:
+    if active and legacy_tempo:
         for lag in range(max(2,round(fps*60/180)),min(n//2,round(fps*60/60))+1):
             a,b=flux[:-lag],flux[lag:];den=np.linalg.norm(a)*np.linalg.norm(b);corr=float(np.dot(a,b)/den) if den>1e-12 else 0.
             bpm=60*fps/lag;candidates.append({'bpm':round(bpm,3),'periodFrames':lag,'periodicityScore':round(corr,5)})
@@ -47,6 +47,44 @@ def analyze(data):
         if all(abs(c['bpm']-v['bpm'])>6 for v in distinct):distinct.append(c)
         if len(distinct)==3:break
     return {'schemaVersion':1,'source':data.get('source'),'fps':fps,'duration':duration,'tempo':{'estimatedBpm':selected['bpm'] if selected else None,'candidates':distinct,'confidence':'candidate_only','caveat':'Half/double tempo ambiguity and tempo changes require review.'},'beatGrid':beats,'transientCandidates':[{'atSeconds':round(i/fps,6),'strength':round(float(flux[i]),5)} for i in peaks],'sectionChangeCandidates':sorted(changes,key=lambda x:x['atSeconds']),'climaxCandidates':climaxes,'listeningStatus':'not_reviewed','limitations':['Signal-derived suggestions, not instrument or semantic recognition.','Beat grid may include non-percussive accents; verify drums by listening.','Climax candidates are sustained-energy suggestions; review musical structure.','Recompute after changing song, crop, timing or playback speed.']}
+
+
+def analyze(data):
+    rhythm=data.get('rhythm')
+    # Energy windows are shared. Calculate only the tempo route actually used.
+    result=_frame_analysis(data,legacy_tempo=not bool(rhythm))
+    if not rhythm:return result
+    rate=float(rhythm['analysisRate']);onset=np.asarray(rhythm['onsetEnvelope'],float);rms=np.asarray(rhythm['rms'],float)
+    if len(onset)!=len(rms) or not np.all(np.isfinite(onset)) or not np.all(np.isfinite(rms)):raise ValueError('Invalid rhythm data')
+    candidates=[]
+    if rms.size>2 and rms.max()>1e-7:
+        for lag in range(max(2,round(rate*60/180)),min(len(onset)//2,round(rate*60/60))+1):
+            a,b=onset[:-lag],onset[lag:];den=np.linalg.norm(a)*np.linalg.norm(b)
+            candidates.append({'bpm':round(60*rate/lag,4),'periodSeconds':lag/rate,'periodicityScore':round(float(np.dot(a,b)/den),5) if den>1e-12 else 0.})
+    distinct=[]
+    for c in sorted(candidates,key=lambda v:v['periodicityScore'],reverse=True):
+        if all(abs(c['bpm']-v['bpm'])>6 for v in distinct):distinct.append(c)
+        if len(distinct)==3:break
+    attacks=rhythm['attacks'];energy=rms/max(1e-10,float(np.percentile(rms,95)));impacts=[]
+    for a in attacks:
+        i=round(a['atSeconds']*rate)
+        if i<round(.5*rate) or i+round(.25*rate)>=len(rms):continue
+        pre=float(energy[max(0,i-round(.8*rate)):max(1,i-round(.06*rate))].mean())
+        post=float(energy[i:min(len(rms),i+round(.25*rate))].mean());lift=max(0,post-pre)
+        impacts.append({'id':'impact-'+a['id'],'attackId':a['id'],'atSeconds':a['atSeconds'],'score':round(2*lift+.25*min(a['strength'],3)+.1*post,5),'energyLift':round(lift,5),'beforeEnergy':round(pre,5),'afterEnergy':round(post,5),'status':'candidate'})
+    chosen=[]
+    for impact in sorted(impacts,key=lambda v:v['score'],reverse=True):
+        if all(abs(impact['atSeconds']-v['atSeconds'])>=1.5 for v in chosen):chosen.append(impact)
+        if len(chosen)==6:break
+    beats=[]
+    if distinct and attacks:
+        period=distinct[0]['periodSeconds'];phase=max(attacks,key=lambda a:a['strength'])['atSeconds']%period
+        for time in np.arange(phase,data['duration'],period):
+            nearby=min(attacks,key=lambda a:abs(a['atSeconds']-time));matched=abs(nearby['atSeconds']-time)<=period*.15
+            beats.append({'atSeconds':nearby['atSeconds'] if matched else round(float(time),6),'source':'transient_aligned' if matched else 'estimated_grid','attackId':nearby['id'] if matched else None})
+    result.update(schemaVersion=2,tempo={'estimatedBpm':distinct[0]['bpm'] if distinct else None,'candidates':distinct,'confidence':'candidate_only','caveat':'Tempo and meter are uncertain; half/double time and local changes require review.'},beatGrid=beats,attackCandidates=attacks,impactCandidates=chosen,analysisRate=rate)
+    result['limitations'].append('Impact score uses local energy lift and attack strength; it does not determine the artistic climax. No instrument or downbeat recognition.')
+    return result
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--features',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()
