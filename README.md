@@ -2,22 +2,20 @@
 
 # vibe-video-studio
 
-### Turn Scientific Ideas into Cinematic Knowledge Videos.
+### 将科学创意转化为电影感知识视频
 
-![vibe-video-studio project cover](docs/media/cover.png)
+![vibe-video-studio 项目封面](docs/media/cover.png)
 
-![Public Code](https://img.shields.io/badge/Code-Public-0f172a?style=flat-square)
-![AI Agent Skill](https://img.shields.io/badge/AI_Agent-Skill-155e75?style=flat-square)
-![Remotion](https://img.shields.io/badge/Built_with-Remotion-0369a1?style=flat-square)
-![Scientific Visualization](https://img.shields.io/badge/Scientific-Visualization-b45309?style=flat-square)
+![代码公开](https://img.shields.io/badge/%E4%BB%A3%E7%A0%81-%E5%85%AC%E5%BC%80-0f172a?style=flat-square)
+![AI 助手技能](https://img.shields.io/badge/AI%20%E5%8A%A9%E6%89%8B-%E6%8A%80%E8%83%BD-155e75?style=flat-square)
+![Remotion 驱动](https://img.shields.io/badge/%E9%A9%B1%E5%8A%A8-Remotion-0369a1?style=flat-square)
+![科学可视化](https://img.shields.io/badge/%E7%A7%91%E5%AD%A6-%E5%8F%AF%E8%A7%86%E5%8C%96-b45309?style=flat-square)
 
-[Showcase](#showcase) · [Quick Start](#quick-start) · [Core Features](#core-features) · [Architecture](#architecture) · [Documentation](#documentation) · [Contributing](#contributing)
+[作品展示](#作品展示) · [快速开始](#快速开始) · [核心功能](#核心功能) · [系统架构](#系统架构) · [文档导航](#文档导航) · [参与贡献](#参与贡献)
 
 </div>
 
-## What can it do?
-
-Transform scientific concepts into cinematic educational videos with original animations, music-aware storytelling and reproducible rendering.
+## 项目简介
 
 把一个科学问题，发展成有文案、有过程、有声画互动的知识短片。`vibe-video-studio` 为 AI 编码助手提供从选题、资料核验、叙事与分镜，到模型动画、音乐分析、Remotion 合成及交付的工作流。
 
@@ -28,7 +26,7 @@ Transform scientific concepts into cinematic educational videos with original an
 
 适用于科学可视化、科普短剧，以及融合知识与生活思考的视频。调用时确定主题、受众、希望传达的思考、集数、各集时长、画幅和帧率。默认美术采用深色空间、有限强调色与电影感，可按项目调整。
 
-## Showcase
+## 作品展示
 
 点击海报，在 B 站观看完整作品。
 
@@ -70,11 +68,11 @@ Transform scientific concepts into cinematic educational videos with original an
   </tr>
 </table>
 
-## Quick Start
+## 快速开始
 
-### Install the Skill
+### 安装技能
 
-通过 skills CLI 安装到支持的 AI 助手。
+通过 skills 命令行工具安装到支持的 AI 助手。
 
 ```bash
 npx skills add win520-1206/vibe-video-studio --skill vibe-video-studio
@@ -88,9 +86,9 @@ npx skills add win520-1206/vibe-video-studio --skill vibe-video-studio --agent c
 
 也可将包含 `SKILL.md` 的整个目录放入助手的 skills 目录。安装器通过 npm 运行，并从 GitHub 获取本项目。
 
-### Make your first video
+### 制作第一部视频
 
-在助手中调用 Skill，给出本次创作需求。
+在助手中调用技能，给出本次创作需求。
 
 ```text
 使用 $vibe-video-studio 制作一部关于反馈与稳定性的知识短片。
@@ -101,9 +99,9 @@ npx skills add win520-1206/vibe-video-studio --skill vibe-video-studio --agent c
 
 助手会补齐尚缺参数，建立独立工程，核验资料，分析音乐并设计镜头。每个主题编写自己的模型、场景与视觉组织。确认后的完整文案用于覆盖检查和 SRT 交付。
 
-### Run the pipeline locally
+### 本地运行工程
 
-准备 Node.js、Python、NumPy、可用的 FFmpeg/ffprobe，以及 Chrome、Edge 或 Chromium。在 Skill 根目录执行以下命令，启动带合成音轨的独立接口诊断。
+准备 Node.js、Python、NumPy、可用的 FFmpeg/ffprobe，以及 Chrome、Edge 或 Chromium。在技能根目录执行以下命令，启动带合成音轨的独立接口诊断。
 
 ```bash
 node scripts/create-project.mjs ../pipeline-test --demo
@@ -128,14 +126,14 @@ npm run dev
 | `check` / `package` | 验收并打包视频、SRT、工程和资料 |
 | `blender:render` | 渲染指定 Blender 镜头 |
 
-## Core Features
+## 核心功能
 
 ```mermaid
 flowchart LR
-    A["Story<br/>叙事与文案"] --> B["Animation<br/>主题模型动画"]
-    B --> C["Music<br/>音乐与镜头节奏"]
-    C --> D["Typography<br/>动态文字"]
-    D --> E["Production<br/>渲染与验收"]
+    A["叙事与文案"] --> B["主题模型动画"]
+    B --> C["音乐与镜头节奏"]
+    C --> D["动态文字"]
+    D --> E["渲染与验收"]
     classDef creative fill:#102b38,stroke:#38bdf8,color:#e2e8f0
     classDef production fill:#302818,stroke:#d6ac69,color:#f8fafc
     class A,B,C,D creative
@@ -144,13 +142,13 @@ flowchart LR
 
 | 模块 | 创作与工程能力 |
 | --- | --- |
-| **Story & Script** | 从疑问推导机制、认识变化与情绪联系，记录科学事实、教学模型、类比和作者观点的依据与边界 |
-| **Theme-Led Animation** | 为题材选择对象、尺度、动作和接续方式，使用 React、SVG、Canvas、WebGL，按镜头评估 Blender |
-| **Music-Aware Direction** | 生成起音、节奏、段落和冲击候选，关联具体动作，设计蓄势、揭示、衰减与落定 |
-| **Dynamic Typography** | 将完整确认稿拆为短语，配置位置、对象锚点、关键词强调和稳定阅读窗口 |
-| **Reproducible Production** | 以共享帧时间、事件 ID 和确定性状态重建画面，执行配置、布局、主体运动、媒体及交付检查 |
+| **叙事与文案** | 从疑问推导机制、认识变化与情绪联系，记录科学事实、教学模型、类比和作者观点的依据与边界 |
+| **主题模型动画** | 为题材选择对象、尺度、动作和接续方式，使用 React、SVG、Canvas、WebGL，按镜头评估 Blender |
+| **音乐与镜头节奏** | 生成起音、节奏、段落和冲击候选，关联具体动作，设计蓄势、揭示、衰减与落定 |
+| **动态文字** | 将完整确认稿拆为短语，配置位置、对象锚点、关键词强调和稳定阅读窗口 |
+| **可复现制作** | 以共享帧时间、事件 ID 和确定性状态重建画面，执行配置、布局、主体运动、媒体及交付检查 |
 
-### Music analysis in practice
+### 音乐分析与画面适配
 
 音乐分析可以在分镜确定前独立运行。
 
@@ -162,7 +160,7 @@ python scripts/analyze_track.py --input "music.mp3" --output "music-analysis" --
 
 算法结果保留候选状态，由实际听取和画面判断决定主揭示。换曲、选段、帧率或速度变化时重新核验。声画流程与字段见相关文档。[可复现音乐分析](references/music-analysis-workflow.md) · [节奏导演](references/music-direction.md)
 
-## Architecture
+## 系统架构
 
 ```mermaid
 flowchart TB
@@ -205,7 +203,7 @@ assets/styles/            可扩展美术方向
 docs/media/               项目封面与作品海报
 ```
 
-## Documentation
+## 文档导航
 
 | 主题 | 文档 |
 | --- | --- |
@@ -217,9 +215,9 @@ docs/media/               项目封面与作品海报
 | 工程与三维接入 | [脚手架](references/scaffold.md) · [系统架构](references/architecture.md) · [工程实践](references/engineering.md) · [Blender](references/blender.md) |
 | 验收与排错 | [验证规范](references/verification.md) · [制作经验](references/production-lessons.md) · [已运行验证记录](assets/validation-report.json) |
 
-## Contributing
+## 参与贡献
 
-欢迎通过 Issue 和 Pull Request 参与项目。
+欢迎提交问题和合并请求，参与项目改进。
 
 - **改进创作方法**。提供主题、观众需要理解的机制、文案到动作的推导，以及科学依据。
 - **完善音乐适配**。描述输入选段、帧率、候选与实际落点，提供可复现步骤和必要的验证记录。
@@ -238,6 +236,6 @@ npm run test:audio
 
 [提交问题](https://github.com/win520-1206/vibe-video-studio/issues) · [参与贡献](https://github.com/win520-1206/vibe-video-studio/pulls)
 
-### Credits & licensing
+### 致谢与许可
 
 项目封面由 AI 生成，作品海报截取自上方展示的视频。整体代码许可证尚待维护者选定。第三方方法来源与依赖遵循各自的许可，字体、音乐和作品素材按具体资产记录使用范围。[第三方说明](THIRD_PARTY_NOTICES.md)
